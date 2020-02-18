@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/place/list"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ place?.name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card *ngIf="place">
+    <img [src]="place.img">
+    <ion-card-header>
+      <ion-card-title>{{ place.name }}</ion-card-title>
+      <ion-card-subtitle>{{ place.description }}</ion-card-subtitle>
+      <ion-card-subtitle>{{ place.address }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+    <div [innerHtml]="place.description"></div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

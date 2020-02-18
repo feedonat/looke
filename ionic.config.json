@@ -1,5 +1,7 @@
 {
   "name": "looke",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
