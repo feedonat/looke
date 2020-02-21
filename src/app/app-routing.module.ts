@@ -4,14 +4,32 @@ import { AutomaticLoginGuard } from './guards/automatic-login.guard';
 import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { RoleGuard } from './guards/role.guard';
 import { TabsPage } from './tabs/tabs.page';
+import { HomePage } from './pages/home/home.page';
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/']);
 const routes: Routes = [
 
 {
-  path:'home',
-  component: TabsPage,
-  children:[
+   path: '1',
+    component: TabsPage,
+    children: [
+
+
   {
+    path:'home',
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./pages/place/place.module').then( m => m.PlacePageModule)
+      },
+      {
+        path: 'place',
+        loadChildren: () => import('./pages/place/place.module').then( m => m.PlacePageModule)
+      }
+
+    ]
+  },
+  
+   {
     path: 'place',
     canActivate: [AngularFireAuthGuard, RoleGuard],
     data: {
@@ -34,7 +52,7 @@ const routes: Routes = [
 
       {
         path: '',
-        redirectTo: 'list',
+        redirectTo: 'add',
         pathMatch: 'full'
       }
     ]
@@ -52,20 +70,27 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
-  { 
-    path: 'tabs', 
-    loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
-  },
   {
-  path: '', redirectTo: 'tabs', 
-  pathMatch: 'full',
-  canActivate: [AutomaticLoginGuard]
+    path: '',
+    redirectTo: '/1/home',
+    pathMatch: 'full'
   }
- ]
 
+
+    ]
+},
+ 
+{
+  path: '',
+  redirectTo: '/1/home',
+  pathMatch: 'full'
 }
 
-];
+ ];
+
+
+
+
 
 @NgModule({
   imports: [

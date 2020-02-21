@@ -47,9 +47,9 @@ export class LoginPage implements OnInit {
   }
   navigateByRole(role) {
     if (role == 'USER') {
-      this.router.navigateByUrl('/place');
+      this.router.navigateByUrl('/home/place');
     } else if (role == 'ADMIN') {
-      this.router.navigateByUrl('/place');
+      this.router.navigateByUrl('home/place');
     }
   }
 

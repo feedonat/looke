@@ -12,7 +12,7 @@ import { MyProfilePageModule } from '../pages/my-profile/my-profile.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    TranslateModule,MyProfilePageModule,
+    TranslateModule,
     TabsPageRoutingModule
   ],
   declarations: [TabsPage]

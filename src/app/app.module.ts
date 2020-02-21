@@ -23,6 +23,7 @@ import { File } from '@ionic-native/file/ngx';
 import { Crop } from '@ionic-native/crop/ngx';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TabsPageModule } from './tabs/tabs.module';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -33,14 +34,17 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [ BrowserAnimationsModule,BrowserModule,TranslateModule, IonicModule.forRoot(), AppRoutingModule, AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    AngularFireStorageModule,TabsPageModule,
+    AngularFireStorageModule,
+    TabsPageModule,
+    BrowserModule,
+    BrowserAnimationsModule,
     AngularFireAuthGuardModule],
 
   providers: [
     StatusBar,
     Camera,
-    File,
-    Crop,
+    File,InAppBrowser,
+    Crop,Geolocation,
     SplashScreen,
     LoginPageModule,Geolocation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
