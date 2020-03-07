@@ -46,7 +46,7 @@ const routes: Routes = [
 
       {
         path: '',
-        redirectTo: 'list',
+        redirectTo: 'add',
         pathMatch: 'full'
       }
     ]
@@ -104,10 +104,8 @@ const routes: Routes = [
   path: '',
   redirectTo: '/1/home',
   pathMatch: 'full'
-},
-  
+}, 
  ];
-
 
 @NgModule({
   imports: [

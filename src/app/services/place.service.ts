@@ -32,10 +32,17 @@ export class PlaceService {
 
     }).then(task => {
       console.log('task: ', task);
+      if(imageData){
       return storageRef.getDownloadURL().toPromise();
+      }
     }).then(imageUrl => {
+
       console.log('got url: ', imageUrl);
+      if(imageData){
       return this.db.doc(`places/${documentId}`).update({ img: imageUrl });
+      }else{
+        return;
+      }
     });
   
   }
