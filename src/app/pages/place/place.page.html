@@ -1,29 +1,44 @@
 <ion-header >
   <ion-toolbar color="primary">
-    <ion-title>business</ion-title>
+    <ion-title>add business </ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
+  <div class="autocomplete">
+    <ion-searchbar color="light" debounce="600" [placeholder]="'business address'"
+      (ionInput)="onSearchAddress($event)">
+    </ion-searchbar>
+    <ion-list lines="none" class="shadow" *ngIf="suggestions.length" [@staggerIn]="suggestions.length">
+      <ion-item class="hover" button detail="false" *ngFor="let suggestion of suggestions"
+        (click)="onSuggestionTouched(suggestion)">
+        <ion-label>
+          <ion-text color="dark">
+            <span class="link bold text-medium">
+              {{ suggestion.description }}
+            </span>
+          </ion-text>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div #map class="map" id="map"></div>    
+
   <ion-card>
   <ion-card-header>
-    <ion-card-title>add business</ion-card-title>
   </ion-card-header>
   <ion-card-content>
     <form [formGroup]="placeForm" (ngSubmit)="register()">
-  
       <div class="box" (click)="selectImage()"
-      [style.border-color]= "primary"
-      [style.background-image]="'url(' + productImageBase64 + ')'">
+      [style.border-color]= "'primary'"
+      [style.background-image] ="productImageBase64 ? 'url(' + productImageBase64 + ')' : './assets/img/avatar.png'">
       <div class="center">
         <ion-spinner *ngIf="isUploading"></ion-spinner>
-        <ion-icon name="camera" color="medium" *ngIf="!isUploading && !productImageBase64"></ion-icon>
+        <ion-icon name="camera" color="bold" *ngIf="!isUploading && !productImageBase64"></ion-icon>
       </div>
       <div class="bottom" *ngIf="!isUploading && !productImageBase64">
         <div>logo</div>
       </div>
     </div>
-
 
      <ion-item lines="none">
         <ion-label position="stacked"> Category </ion-label>
@@ -60,8 +75,6 @@
         <ion-input type="address" formControlName="address"></ion-input>
       </ion-item>
       
-  
-    
       <ion-button type="submit" class="ion-padding-horizontal ion-margin-vertical"
       [disabled]="!placeForm.valid">
         Add

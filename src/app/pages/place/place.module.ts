@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { PlacePageRoutingModule } from './place-routing.module';
 import { PlacePage } from './place.page';
 import { Camera } from '@ionic-native/camera/ngx';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [

@@ -3,25 +3,35 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 import { Observable, from, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { NavController } from '@ionic/angular';
+import { switchMap, map } from 'rxjs/operators';
+import { NavController, ToastController } from '@ionic/angular';
+import { Route } from '@angular/compiler/src/core';
+import { Router } from '@angular/router';
+import { AngularFireStorageReference, AngularFireStorage } from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   user: Observable<any>;
+  uuid = null;
 
-  constructor(private afAuth: AngularFireAuth, private db: AngularFirestore, private navCtrl: NavController) {
+  constructor(private afAuth: AngularFireAuth,
+              private db: AngularFirestore,
+              private navCtrl: NavController,
+              private router: Router,
+              private toastCtrl: ToastController,
+              private storage: AngularFireStorage) {
     this.user = this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
+          this.uuid = user.uid;
           return this.db.doc(`users/${user.uid}`).valueChanges();
         } else {
           return of(null);
         }
       })
-    )
+    );
   }
 
   signIn(credentials): Observable<any> {
@@ -34,7 +44,7 @@ export class AuthService {
           return of(null);
         }
       })
-    )
+    );
   }
 
   signUp(credentials) {
@@ -49,30 +59,57 @@ export class AuthService {
     });
   }
 
-  signOut() {
+updateProfiel(record) {
+  let storageRef: AngularFireStorageReference = null;
+  const imageData = record.img;
+  this.uuid = this.afAuth.auth.currentUser.uid;
+  console.log('record ' + JSON.stringify(record));
+  console.log('uuid ' + this.uuid);
+  this.db.doc('users/' + this.uuid).update(record).then(() => {
+      storageRef = this.storage.ref(`users/${this.uuid}`);
+      const uploadTask = storageRef.putString(imageData, 'base64', { contentType: 'image/png'});
+      return uploadTask;
+
+  }).then(task => {
+    console.log('task: ', task);
+    return storageRef.getDownloadURL().toPromise();
+  }).then(imageUrl => {
+    console.log('got url: ', imageUrl);
+    return this.db.doc(`users/${this.uuid}`).update({ img: imageUrl });
+  });
+
+  }
+
+signOut() {
     this.afAuth.auth.signOut().then(() => {
+      this.user = null;
       this.navCtrl.navigateRoot('/');
     });
   }
 
-  /*  Login Universal Data
-    ==============================*/
-    getDataForLoginFlat = () => {
-      let data = {
-          "logo": "assets/images/csform-logo.png",
-          "btnLogin": "Login",
-          "txtUsername" : "Username",
-          "txtPassword" : "Password",
-          "txtForgotPassword" : "Forgot password?",
-          "btnResetYourPassword": "Reset your password",
-          "txtSignupnow" : "Don't have an account?",
-          "btnSignupnow": "Signup now",
-          "title": "Welcome back,",
-          "subtitle": "please login to your account.",
-          "errorUser" : "Field can't be empty.",
-          "errorPassword" : "Field can't be empty."
-      };
-      return data;
-  };
+isLoggedIn() {
+    if (this.user == null ) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+logout() {
+      this.afAuth.auth.signOut()
+      .then((res) => this.router.navigate(['/']));
+    }
+
+getCurrentUser() {
+    this.user = this.afAuth.authState.pipe(
+    switchMap(user => {
+        if (user) {
+         return this.db.doc(`users/${user.uid}`).valueChanges();
+         } else {
+          return of(null);
+        }
+     })
+     );
+    return this.user;
+  }
 
 }

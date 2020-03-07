@@ -1,0 +1,35 @@
+ion-input {
+    background: #fafaf8;
+    border-radius: 10px;
+    margin-top: 6px;
+    --padding-start: 6px !important;
+  }
+  ion-avatar {
+  
+    width: 100px;
+    height: 100px;
+    img {
+      background: var(--ion-color-light);
+      display: inline-block;
+      max-width: 100px;
+      max-height: 100px;
+      border-radius: 100%;
+    }
+  }
+            
+.profilebutton {
+    z-index: 2;
+    position: absolute;
+    left: 22%;
+    top: 8%;
+    margin: auto;
+}
+.profilepic {
+  border:1px solid #000;
+  width: 65%;
+  height: 65%;
+}
+.profilepic-border {
+  position: relative;
+  background: #a3a3a3;
+}

@@ -9,8 +9,8 @@ import { PlaceService } from 'src/app/services/place.service';
 })
 export class PlaceDetailPage implements OnInit {
 
-  id=null;
-  place=null;
+  id = null;
+  place = null;
   constructor(private route: ActivatedRoute, private placeService: PlaceService) { }
 
   ngOnInit() {
