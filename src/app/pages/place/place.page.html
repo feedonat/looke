@@ -5,11 +5,7 @@
 </ion-header>
 <ion-content>
   <div class="autocomplete">
-<<<<<<< HEAD
     <ion-searchbar color="light" debounce="600" [placeholder]="'business address'"
-=======
-    <ion-searchbar color="light" debounce="600" [placeholder]="'ENTER_ADDRESS'"
->>>>>>> cfecd8251866e37a028e8021d6bfbf33c7af2548
       (ionInput)="onSearchAddress($event)">
     </ion-searchbar>
     <ion-list lines="none" class="shadow" *ngIf="suggestions.length" [@staggerIn]="suggestions.length">

@@ -54,22 +54,11 @@ export class PlacePage implements OnInit {
       phone: ['', Validators.required],
       img:''
     });
-<<<<<<< HEAD
    this.loadGoogleMaps();
 
   }
 
 
-=======
-    this.loadGoogleMaps();
-
-  }
-
-  ionViewWillEnter() {
-    //this.loadGoogleMaps();
-    //this.loadUserPosition();
-  }
->>>>>>> cfecd8251866e37a028e8021d6bfbf33c7af2548
 
 
   async register() {
@@ -228,24 +217,15 @@ export class PlacePage implements OnInit {
     if (!this.marker) {
       this.marker = new google.maps.Marker({
         icon: {
-<<<<<<< HEAD
           url: './assets/img/marker.svg',
-=======
-          url: './assets/img/pin.png',
->>>>>>> cfecd8251866e37a028e8021d6bfbf33c7af2548
           scaledSize: new google.maps.Size(32, 32),
           origin: new google.maps.Point(0, 0),
           anchor: new google.maps.Point(0, 0)
         },
-<<<<<<< HEAD
         
         position: position,
         map: this.map,
        
-=======
-        position: position,
-        map: this.map,
->>>>>>> cfecd8251866e37a028e8021d6bfbf33c7af2548
       });
       this.marker.setAnimation(4);
       
