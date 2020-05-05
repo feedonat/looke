@@ -37,7 +37,7 @@ export class MyProfilePage implements OnInit {
   }
 
   async openSignInModal() {
-   this.navCntr.navigateRoot("1/profile/login")
+   this.navCntr.navigateRoot("1/home/login")
   }
   async mySettings() {
     this.navCntr.navigateRoot("1/profile/mySettings")
@@ -54,6 +54,19 @@ export class MyProfilePage implements OnInit {
    async changePassword() {
     this.navCntr.navigateRoot("1/profile/changePassword")
    }
+
+   async addPost() {
+    this.navCntr.navigateRoot("1/profile/add-post")
+   }
+
+   async banner() {
+    this.navCntr.navigateRoot("1/profile/banner");
+   }
+   async postCategory() {
+    this.navCntr.navigateRoot("1/profile/post-category");
+   }
+
+
 
   async onPresentEditModal(user) {
 

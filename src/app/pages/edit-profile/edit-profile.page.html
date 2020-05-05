@@ -3,41 +3,37 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="1/profile"></ion-back-button>
     </ion-buttons>
-    <ion-title>edit profile</ion-title>
+    <ion-title align-items-center>edit profile</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <div>
+<ion-content>
   <ion-card>
-      <ion-card-header>
-        <ion-card-title>edit profile</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
-  
-          <section class="heading">
-            <ion-avatar (click)="selectImage()">
-              <img [src]="profileImageBase64 ? profileImageBase64 : user?.img">
-            </ion-avatar>
-        </section>
-          <ion-item lines="none">
-            <ion-label position="stacked">Email</ion-label>
-            <ion-input type="email" formControlName="email" [(ngModel)]="user['email']"></ion-input>
-          </ion-item>
-  
-          <ion-item lines="none">
-            <ion-label position="stacked">Name</ion-label>
-            <ion-input formControlName="name" [(ngModel)]="user['name']"></ion-input>
-          </ion-item>
-  
-          <ion-button expand="block" type="submit" color="primary" [disabled]="!profileForm.valid"
+
+    <ion-card-content>
+      <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+
+        <div class="profie_box">
+          <div class="profie_img">
+            <img [src]="profileImageBase64 ? profileImageBase64 : user?.img">
+          </div>
+          <ion-icon slot="icon-only" (click)="selectImage()" name="camera"></ion-icon>
+        </div>
+        <ion-item lines="none">
+          <ion-label position="stacked">Email</ion-label>
+          <ion-input type="email" formControlName="email" [(ngModel)]="user['email']"></ion-input>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label position="stacked">Name</ion-label>
+          <ion-input formControlName="name" [(ngModel)]="user['name']"></ion-input>
+        </ion-item>
+
+        <ion-button expand="block" type="submit" color="primary" [disabled]="!profileForm.valid"
           class="ion-padding-horizontal ion-margin-vertical">
-        save
+          save
         </ion-button>
-        </form>
-      </ion-card-content>
-    </ion-card>
-</div>
- 
+      </form>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -21,4 +21,9 @@ describe('PlacePage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should generate the component',() => {
+  expect(component).toBeTruthy();
+})
+
+
 });

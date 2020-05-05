@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-//import { AutomaticLoginGuard } from './guards/automatic-login.guard';
 import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { RoleGuard } from './guards/role.guard';
 import { TabsPage } from './tabs/tabs.page';
@@ -14,27 +13,67 @@ const routes: Routes = [
     children: [
 
   {
+    
     path:'home',
+    children: [
+
+      {
+        path: 'place',
+        loadChildren: () => import('./pages/place/place.module').then( m => m.PlacePageModule)
+      },
+
+      {
+        path: 'login',
+        loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+      }
+
+    ]
+  },
+  
+  {
+    path: 'post',
     children: [
       {
         path: '',
         loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
       },
       {
-        path: 'place',
-        loadChildren: () => import('./pages/place/place.module').then( m => m.PlacePageModule)
+        path: 'add',
+        loadChildren: () => import('./pages/add-post/add-post.module').then( m => m.AddPostPageModule)
+      },
+      {
+        path: 'list',
+        loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
+      },
+      {
+        path: 'list/:id',
+        loadChildren: () => import('./pages/post-detail/post-detail.module').then( m => m.PostDetailPageModule)
+      },
+      {
+        path: ':id',
+        loadChildren: () => import('./pages/post-detail/post-detail.module').then( m => m.PostDetailPageModule)
+      },
+      {
+        path: '',
+        redirectTo: 'list',
+        pathMatch: 'full'
       }
-
     ]
   },
-  
+
+
    {
     path: 'place',
-    children: [ 
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./pages/place-list/place-list.module').then( m => m.PlaceListPageModule)
+      },
       {
         path: 'add',
         loadChildren: () => import('./pages/place/place.module').then( m => m.PlacePageModule)
       },
+
       {
         path: 'list',
         loadChildren: () => import('./pages/place-list/place-list.module').then( m => m.PlaceListPageModule)
@@ -43,22 +82,26 @@ const routes: Routes = [
         path: 'list/:id',
         loadChildren: () => import('./pages/place-detail/place-detail.module').then( m => m.PlaceDetailPageModule)
       },
+      {
+        path: ':id',
+        loadChildren: () => import('./pages/place-detail/place-detail.module').then( m => m.PlaceDetailPageModule)
+      },
 
       {
         path: '',
-        redirectTo: 'add',
+        redirectTo: 'list',
         pathMatch: 'full'
       }
     ]
   },
   {
-    path:'profile',
+    path: 'profile',
     children: [
       {
         path: '',
         loadChildren: () => import('./pages/my-profile/my-profile.module').then( m => m.MyProfilePageModule)
       },
-      
+
       {
         path: 'edit',
         loadChildren: () => import('./pages/edit-profile/edit-profile.module').then( m => m.EditProfilePageModule)
@@ -82,19 +125,32 @@ const routes: Routes = [
       {
         path: 'mySettings',
         loadChildren: () => import('./pages/mysettings/mysettings.module').then( m => m.MysettingsPageModule)
+      },
+
+      {
+        path: 'post-category',
+        loadChildren: () => import('./pages/post-category/post-category.module').then( m => m.PostCategoryPageModule)
+      },
+      {
+        path: 'banner',
+        loadChildren: () => import('./pages/banner/banner.module').then( m => m.BannerPageModule)
+      },
+      {
+        path: 'add-post',
+        loadChildren: () => import('./pages/add-post/add-post.module').then( m => m.AddPostPageModule)
       }
 
     ]
   },
-  
+
   {
     path: '',
-    redirectTo: '/1/home',
+    redirectTo: '/1/home/post',
     pathMatch: 'full'
   }
     ]
 },
- 
+
 {
   path: 'login',
   loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
@@ -102,9 +158,14 @@ const routes: Routes = [
 
 {
   path: '',
-  redirectTo: '/1/home',
+  redirectTo: '/1/post',
   pathMatch: 'full'
-}, 
+},
+  {
+    path: 'gallery',
+    loadChildren: () => import('./pages/gallery/gallery.module').then( m => m.GalleryPageModule)
+  }
+
  ];
 
 @NgModule({

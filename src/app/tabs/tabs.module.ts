@@ -6,13 +6,15 @@ import { TabsPageRoutingModule } from './tabs-routing.module';
 import { TabsPage } from './tabs.page';
 import { TranslateModule } from '@ngx-translate/core';
 import { MyProfilePageModule } from '../pages/my-profile/my-profile.module';
-
+import { FivAppBarModule, FivGalleryModule } from '@fivethree/core';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     TranslateModule,
+    FivAppBarModule,
+    FivGalleryModule,
     TabsPageRoutingModule
   ],
   declarations: [TabsPage]

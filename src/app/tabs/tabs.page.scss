@@ -1,0 +1,20 @@
+.custom-tabs {
+    contain: none;
+  }
+  
+  .custom-tabs ion-fab-button {
+    ion-icon {
+      font-size: 3em;
+      color: red($color: #000000);
+    }
+    color: #000;
+    --ion-color-base: var(--ion-color-primary);
+    background-color: var(--ion-color-primary);
+    border-radius: 50%;
+    max-width: 56px;
+    height: 56px;
+    margin-bottom: 30px;
+    box-shadow: 0px 10px 10px 0px rgba(240, 207, 19, 0.45);
+    //box-shadow: 0 -3px 6px -1px rgba(235, 203, 22, 0.4);
+    border: 1px solid rgba(78, 71, 71, 0.2);
+  }

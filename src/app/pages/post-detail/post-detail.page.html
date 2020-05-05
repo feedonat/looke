@@ -1,0 +1,101 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons color="orange" slot="start">
+      <ion-back-button color="light" defaultHref="1/post/list"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="main-header5">{{post?.title}}</ion-title>
+    <!-- A favorite button will not show if user not login. -->
+    <ion-buttons slot="end">
+      <ion-button color="light" (click)="toggleHeart()">
+        <ion-icon slot="icon-only" [name]="heartType"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button color="light" (click)="toggleHeart()">
+        <ion-icon slot="icon-only" name="more"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-card mode="ios">
+    <img *ngIf="post?.img" [src]="post?.img" />
+    <ion-card-subtitle>
+      <ion-item>
+        <ion-label>{{post?.title}}</ion-label>
+      </ion-item>
+    </ion-card-subtitle>
+    <ion-card-content>
+      {{post?.description}}
+    </ion-card-content>
+  </ion-card>
+  <ion-row color="light">
+    <ion-col class="card-footer1">
+      <ion-button fill="clear" size="small" color="dark">
+        <ion-icon slot="start" name="ios-chatboxes" color="gray"></ion-icon>
+       {{post?.comments.length}}
+      </ion-button>
+      <ion-button fill="clear" size="small" color="dark">
+        <ion-icon slot="start" name="ios-heart" color="gray"></ion-icon>
+        50
+      </ion-button>
+    </ion-col>
+
+    <ion-col center class="ion-text-right card-footer2">
+      <ion-button fill="clear" size="small" color="dark">
+        REPLY
+      </ion-button>
+    </ion-col>
+    <br>
+  </ion-row>
+  <ion-list no-margin>
+    <h5 no-margin class="comment-header">
+      <ion-icon class="text-medium" name="chatbubbles"></ion-icon>
+      Comments
+    </h5>
+    <div>
+      <ion-item class="comment-list" *ngFor="let c of post?.comments">
+        <ion-avatar slot="start">
+          <img [src]="c?.user.img" />
+        </ion-avatar>
+        <ion-label text-wrap>
+          <ion-text color="medium" float-end>
+            <span class="text-small">
+              {{c.time.seconds *1000 | amTimeAgo}}
+            </span>
+          </ion-text>
+           <h4>{{c?.user.name}}</h4> 
+          <ion-text color="dark">
+            <div class="message">{{c?.comment}}</div>
+          </ion-text>
+          <p>
+          <ion-button fill="clear" size="small" color="dark">
+            <ion-icon slot="start" name="thumbs-up" color="gray"></ion-icon>
+            {{post?.comments.length}}
+          </ion-button>
+          <ion-button fill="clear" size="small" color="dark">
+            Reply
+          </ion-button>
+        </p>
+        </ion-label>
+      </ion-item>
+    </div>
+  </ion-list>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <form [formGroup]="addPostForm" (ngSubmit)="addComment()">
+      <ion-item lines="none">
+        <textarea placeholder=" your comments " #myInput id="myInput" rows="1" maxLength="500" (keyup)="resize()"
+          formControlName="comment"></textarea>
+        <ion-buttons slot="end">
+          <ion-button type="submit">
+            Send
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+
+    </form>
+  </ion-toolbar>
+</ion-footer>

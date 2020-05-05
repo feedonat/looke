@@ -9,7 +9,7 @@ export class CategoryService {
 
     getCategories() { 
     return new Array("Hotel", "Caffee", "Hospital", "school"); 
- }
+  }
   
 
 }

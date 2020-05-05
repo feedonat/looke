@@ -1,21 +1,77 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="1/place/list"></ion-back-button>
+<ion-header class="ion-no-border">
+  <ion-toolbar class="first" [class.show-background]="showToolbar">
+    <ion-buttons color="orange" slot="start">
+      <ion-back-button color="light" defaultHref="1/place/list"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{ place?.name }}</ion-title>
+    <ion-title class="main-header5" [class.show-title]="showTitle">{{place?.name}}</ion-title>
+    <!-- A favorite button will not show if user not login. -->
+    <ion-buttons slot="end">
+      <ion-button color="light" (click)="toggleHeart()">
+        <ion-icon slot="icon-only" [name]="heartType"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button color="light" (click)="toggleHeart()">
+        <ion-icon slot="icon-only" name="more"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
+<ion-content no-padding fullscreen (ionScroll)="onScroll($event)" [scrollEvents]="true" [class.transition]="transition">
+  <!--*********** Image header  ***********-->
+  <!-- <div class="detail-header" [ngStyle]="{'background-image': 'url(' + itemArray.image + ')'}">
+</div> -->
 
-<ion-content>
+  <ion-slides pager="true" [options]="sliderOpts">
+    <ion-slide *ngFor="let s of slides">
+      <img class="image-slide" src="../../../assets/images/{{s.id}}.jpeg">
+    </ion-slide>
+  </ion-slides>
+  <ion-card class="main-card">
+    <ion-card-content class="card-main-content">
+      <ion-card-header>
+        <ion-item margin-vertical lines="none">
+          <img class="card-img" [src]="place?.img" slot="start" />
+          <ion-label text-nowrap>
+            <ion-text color="dark">
+              <h1 class="bold ellipsis" ion-text color="primary">
+                {{ place?.name }}
+              </h1>
+            </ion-text>
+            <div>
+              <ion-icon style="font-size: 18px !important;" color="warning" *ngFor="let i of [0,1,2,3,4]"
+                [name]="i < place?.rating  ? 'star' : 'star-outline'"></ion-icon>
+            </div>
+          </ion-label>
+        </ion-item>
+      </ion-card-header>
 
-  <ion-card *ngIf="place">
-    <img [src]="place.img">
-    <ion-card-header>
-      <ion-card-title>{{ place.name }}</ion-card-title>
-      <ion-card-subtitle>{{ place.description }}</ion-card-subtitle>
-      <ion-card-subtitle>{{ place.address }}</ion-card-subtitle>
-      <div [innerHtml]="place.description"></div>
-    </ion-card-header>
+      <ion-card-content>
+        {{place?.description}}
+      </ion-card-content>
+    </ion-card-content>
   </ion-card>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col sizeXl="10" offsetXl="1" sizeLg="10" offsetLg="1" sizeMd="12" sizeXs="12" offsetXs="0" offsetSm="0"
+        offsetMd="0" sizeSm="12" sizeMd="12">
+
+        <fiv-gallery>
+          <fiv-gallery-toolbar position="top">
+            <fiv-gallery-toolbar-content></fiv-gallery-toolbar-content>
+          </fiv-gallery-toolbar>
+          <ion-grid fixed>
+            <ion-row>
+              <ion-col *ngFor="let pic of picsum" size="6" sizeMd="4">
+                <fiv-gallery-image [src]="pic"></fiv-gallery-image>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </fiv-gallery>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>

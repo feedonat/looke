@@ -14,6 +14,8 @@ ion-input {
       max-width: 100px;
       max-height: 100px;
       border-radius: 100%;
+      margin-bottom: 30px;
+     
     }
   }
             
@@ -31,5 +33,73 @@ ion-input {
 }
 .profilepic-border {
   position: relative;
-  background: #a3a3a3;
+  background: #e79909;
 }
+
+ion-card.main-card{
+  background:linear-gradient(135deg, #61edfa 0%,#f9c453 100%);
+  border-radius: 4px 100px 10px 10px;
+  max-width:500px;
+  overflow: visible;
+  margin-top: 80px;
+}
+.card-img{
+  max-width:80px;
+}
+.card-main-content{
+  background: rgb(238, 234, 177);
+  border-radius: 4px 60px 10px 10px;
+}
+.card-amount{
+  --background: transparent;
+  --border-color: transparent;
+  color: #fff;
+}
+.card-image-blk{
+  --background: transparent;
+  --border-color: transparent;
+  margin-bottom: -30px;
+  margin-top: -30px;
+}
+
+	.profie_box {
+		position: relative;
+		overflow: hidden;
+		height: 148px;
+
+		.profie_img {
+			width: 130px;
+			height: 130px;
+			border-radius: 5px;
+			overflow: hidden;
+			position: relative;
+			margin: 0 auto;
+
+			img {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: -50% !important;
+				bottom: 0;
+				right: -50% !important;
+				margin: auto;
+			}
+		}
+
+		ion-icon {
+			position: absolute;
+			width: 36px;
+			height: 36px;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			margin: auto;
+			background: whitesmoke;
+			border-radius: 50%;
+			color: #000;
+			text-align: center;
+			font-size: 2.1rem;
+			line-height: 36px;
+		}
+	}

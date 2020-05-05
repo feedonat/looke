@@ -1,39 +1,33 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core@4.7.4/css/ionic.bundle.css" />
-  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core@4.7.4/dist/ionic/ionic.esm.js"></script>
-  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core@4.7.4/dist/ionic/ionic.js"></script>
 
-<ion-header no-border>
-  <ion-toolbar color="primary" fixed>
+ <ion-header no-border>
+  <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-button>
+        <ion-back-button color="light"  defaultHref="1/home/post"></ion-back-button>
+      </ion-button>
     </ion-buttons>
-    <ion-title>profile</ion-title>
+    <ion-title>&nbsp;</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openSignInModal()" *ngIf="!user">
+        <ion-icon name="log-in"></ion-icon>
+       </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content fullscreen fixed>
 
-  <ion-grid fixed>
-
-
-    <ion-row class="ion-justify-content-center">
-      <ion-col no-padding size-xs="12" size-sm size-md size-lg="8">
-
-        <div>
-
-          <section class="heading">
-              <ion-avatar>
-                <img [src]="user?.img ? user.img : './assets/img/avatar.png'" alt="your image">
-              </ion-avatar>
-            <ion-text color="light">
-              <h3>{{ user?.name }}</h3>
-            </ion-text>
-
-            <ion-button margin-top shape="round" color="light" (click)="openSignInModal()" *ngIf="!user">
-             login
-            </ion-button>
-
-          </section>
+  <div class="card">
+      <div class="header">
+        <div class="avatar">
+          <img [src]="user?.img ? user.img : './assets/img/avatar.png'" alt="">
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="user-meta ion-text-center">
+          <h3 class="playername">{{ user?.name }}</h3>
+          <h5 class="country">Dallas,TX</h5>
+        </div>
           <ion-card class="main-card">
             <ion-card-content class="card-main-content">
               <ion-item class="card-image-blk">
@@ -53,61 +47,89 @@
       </ion-item>
       </ion-card-content>
           </ion-card>
+<ion-card mode="ios">
           <ion-list>
             <ion-item (click)="myBusiness()">
               <ion-icon name="pin" slot="start" color="primary"></ion-icon>
               <ion-label>
                 <p class="bold" color="dark">My Places</p>
               </ion-label>
-              <ion-icon name="arrow-forward" slot="end" color="dark"></ion-icon>
+              <ion-icon name="arrow-forward" slot="end"></ion-icon>
             </ion-item>
             <ion-item (click)="myLikes()">
               <ion-icon name="heart" slot="start" color="primary"></ion-icon>
               <ion-label>
                 <p color="dark">likes</p>
               </ion-label>
-              <ion-icon name="arrow-forward" slot="end" color="dark"></ion-icon>
+              <ion-icon name="arrow-forward" slot="end"></ion-icon>
             </ion-item>
             <ion-item (click)="myReview()">
               <ion-icon name="star" slot="start" color="primary"></ion-icon>
               <ion-label>
-                <p class="bold link text-slarge" color="dark">Reviews</p>
+                <p class="bold link text-slarge">Reviews</p>
               </ion-label>
-              <ion-icon name="arrow-forward" slot="end" color="dark"></ion-icon>
+              <ion-icon name="arrow-forward" slot="end"></ion-icon>
             </ion-item>
             <ion-item (click)="changePassword()">
               <ion-icon name="lock" slot="start" color="primary"></ion-icon>
               <ion-label>
-                <p class="link bold link text-slarge" color="dark">Change Password</p>
+                <p class="link bold link text-slarge">Change Password</p>
               </ion-label>
-              <ion-icon name="arrow-forward" slot="end" color="dark"></ion-icon>
+              <ion-icon name="arrow-forward" slot="end"></ion-icon>
             </ion-item>
-            <ion-item [(ngModel)]="user" (click)="onPresentEditModal(user)" [ngModelOptions]="{standalone: true}" ngDefaultControl>
+
+            <ion-item (click)="addPost()">
+              <ion-icon name="lock" slot="start" color="primary"></ion-icon>
+              <ion-label>
+                <p class="link bold link text-slarge">AddPost</p>
+              </ion-label>
+              <ion-icon name="arrow-forward" slot="end"></ion-icon>
+            </ion-item>
+
+            <ion-item (click)="banner()">
+              <ion-icon name="lock" slot="start" color="primary"></ion-icon>
+              <ion-label>
+                <p class="link bold link text-slarge">banner</p>
+              </ion-label>
+              <ion-icon name="arrow-forward" slot="end"></ion-icon>
+            </ion-item>
+
+            <ion-item (click)="postCategory()">
+              <ion-icon name="lock" slot="start" color="primary"></ion-icon>
+              <ion-label>
+                <p class="link bold link text-slarge">PostCategory</p>
+              </ion-label>
+              <ion-icon name="arrow-forward" slot="end"></ion-icon>
+            </ion-item>
+
+            <ion-item [(ngModel)]="user" (click)="onPresentEditModal(user)"[ngModelOptions]="{standalone: true}" ngDefaultControl>
               <ion-icon name="create" slot="start" color="primary"></ion-icon>
               <ion-label>
-                <p class="link bold link text-slarge" color="dark">Edit Profile</p>
+                <p class="link bold link text-slarge" >Edit Profile</p>
               </ion-label>
-              <ion-icon name="arrow-forward" slot="end" color="dark"></ion-icon>
+              <ion-icon name="arrow-forward" slot="end"></ion-icon>
             </ion-item>
             <ion-item (click)="mySettings()">
               <ion-icon name="cog" slot="start" color="primary"></ion-icon>
               <ion-label>
                 <p class="link bold link text-slarge" color="dark">Settings</p>
               </ion-label>
-              <ion-icon name="arrow-forward" slot="end" color="dark"></ion-icon>
+              <ion-icon name="arrow-forward" slot="end"></ion-icon>
             </ion-item>
             <ion-item lines="none" (click)="onLogout()">
               <ion-icon name="log-out" slot="start" color="primary"></ion-icon>
               <ion-label>
-                <p class="link bold link text-slarge"color="dark">Logout</p>
+                <p class="link bold link text-slarge">Logout</p>
               </ion-label>
-              <ion-icon name="arrow-forward" slot="end" color="dark"></ion-icon>
+              <ion-icon name="arrow-forward" slot="end"></ion-icon>
             </ion-item>
           </ion-list>
-
+        </ion-card>
         </div>
+      </div>
 
-      </ion-col>
-    </ion-row>
-  </ion-grid> 
+      
+     <!-- // </ion-col>
+    //</ion-row>
+ // </ion-grid>  -->
 </ion-content>

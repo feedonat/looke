@@ -18,7 +18,6 @@ import { MapStyle } from 'src/app/services/map-style';
 export class PlacePage implements OnInit {
   @ViewChild('fileInput',{static: false}) fileInput: ElementRef;
   mainUpload:any;
-  private eventFileUpload: EventEmitter<File> = new EventEmitter<File>();
 
   @ViewChild('map', { static: false }) mapElement: ElementRef;
   @ViewChild(IonSearchbar,{static:false}) searchBar: IonSearchbar;
@@ -185,7 +184,6 @@ export class PlacePage implements OnInit {
 
     this.autocompleteService = new google.maps.places.AutocompleteService();
     this.placesService = new google.maps.places.PlacesService(this.map);
-    
     try {
       const coords = await this.geolocationService.getCurrentPosition();
       if (!coords) {
@@ -203,7 +201,6 @@ export class PlacePage implements OnInit {
       this.map.setZoom(15);
 
     } catch (err) {
-      
     }
   }
   toggleMarker() {

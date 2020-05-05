@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>addPost</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+  <ion-card-header>
+  </ion-card-header>
+  <ion-card-content>
+    <form [formGroup]="postForm" (ngSubmit)="addPost()">
+      <div class="box" (click)="selectImage()"
+      [style.border-color]= "'primary'"
+      [style.background-image] ="productImageBase64 ? 'url(' + productImageBase64 + ')' : './assets/img/avatar.png'">
+      <div class="center">
+        <ion-spinner *ngIf="isUploading"></ion-spinner>
+        <ion-icon name="camera" color="bold" *ngIf="!isUploading && !productImageBase64"></ion-icon>
+      </div>
+      <div class="bottom" *ngIf="!isUploading && !productImageBase64">
+        <div>logo</div>
+      </div>
+    </div>
+
+     <ion-item lines="none">
+        <ion-label position="stacked"> Post Type </ion-label>
+        <ion-select formControlName="postCategory">
+          <ion-select-option *ngFor="let category of categories | async">
+            {{ category.name }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+     <ion-item lines="none">
+        <ion-label position="stacked">Title</ion-label>
+        <ion-input type="name" placeholder="post title.." formControlName="title"></ion-input>
+      </ion-item> 
+
+      <ion-item lines="none">
+        <ion-label position="stacked">Description</ion-label>
+        <ion-input placeholder="business description" formControlName="description"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label position="stacked">Address</ion-label>
+        <ion-input type="address" formControlName="address"></ion-input>
+      </ion-item>
+      
+      <ion-button type="submit" class="ion-padding-horizontal ion-margin-vertical"
+      [disabled]="!postForm.valid">
+        Add
+      </ion-button>
+    </form>
+  </ion-card-content>
+</ion-card>
+</ion-content>

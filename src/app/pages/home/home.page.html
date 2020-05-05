@@ -1,9 +1,77 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>home</ion-title>
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-title>
+        <img class="title-image" src="../../../assets/imgs/white_logo.png" width="40" height="43" />
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon color="light" name="settings"></ion-icon>
+       </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-
+  <div class="ion-padding content-container ">
+    <!--*********** Category  ***********-->
+    <ion-item lines="none" >
+      <h3 #triggerElement class="main-header5">Category</h3>
+    </ion-item>
+    <div class="top-horizontal-scroll  slide-left">
+      <ion-card tappable class="shop-main-h-card shop-card-s-wide " *ngFor="let category of categories | async"
+        (click)="openDetail('side-menu/shopping/tabs/tab1/shopping-item',category.id)">
+        <div class="card-s-wide-bg ion-text-uppercase" [ngStyle]="{'background-image': 'url(' + category.img+ ')'}">
+          <h2 class="card-s-wide-title"> {{category.name}}</h2>
+        </div>
+      </ion-card>
+    </div>
+    <ion-card mode="ios" *ngFor="let post of posts  | async "[routerLink]="[post.id]">
+      <ion-item lines="none">
+        <ion-avatar slot="start">
+          <img [src]="post.poster.img">
+        </ion-avatar>
+        <ion-buttons slot="end">
+          <ion-button>
+            <ion-icon slot="icon-only" color="medium" name="more"></ion-icon>
+           </ion-button>
+        </ion-buttons>
+        <ion-label>
+          <h3>{{post.poster.name}}</h3>
+          <p>{{post.created.seconds *1000 | amTimeAgo}}</p>
+        </ion-label>
+  
+      </ion-item>
+      <ion-item *ngIf="post.img">
+        <ion-slides pager="true">
+          <ion-slide>
+            <img class="image-slide" [src]="post.img">
+          </ion-slide>
+        </ion-slides>
+      </ion-item>
+      <ion-card-content>
+        <ion-card-title>
+          <h2 class="main_header4"> {{post.title}}</h2>
+        </ion-card-title>
+        <p>
+          {{post.description}}
+        </p>
+      </ion-card-content>
+      <ion-row>
+        <ion-col>
+          <ion-button fill="clear" size="small" color="dark">
+            <ion-icon slot="start" name="ios-chatboxes" color="gray"></ion-icon>
+            {{post.comments?.length}}
+          </ion-button>
+          <ion-button fill="clear" size="small" color="dark">
+            <ion-icon slot="start" name="ios-heart" color="gray"></ion-icon>
+            50
+          </ion-button>
+        </ion-col>
+        <ion-col center class="ion-text-right">
+          <ion-button fill="clear" size="small" color="dark">
+            REPLY
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
 </ion-content>
