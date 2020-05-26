@@ -41,6 +41,7 @@ export class HomePageService {
   }
   getOnePost(id) {
     return this.firestore.doc(`post/${id}`).valueChanges();
+    
   }
 
 
@@ -190,8 +191,8 @@ searchItem(){
     })
   );
 }
-addComment(id, comment, commiter) {
-  comment.user = commiter;
+addComment(id, comment,user) {
+  comment.user = user;
   comment.time = new Date();
   this.firestore
       .collection('post')

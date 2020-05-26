@@ -27,18 +27,18 @@
       </ion-item>
     </ion-card-subtitle>
     <ion-card-content>
-      {{post?.description}}
+    <p [innerHTML]="post?.description"></p>
     </ion-card-content>
   </ion-card>
   <ion-row color="light">
     <ion-col class="card-footer1">
-      <ion-button fill="clear" size="small" color="dark">
-        <ion-icon slot="start" name="ios-chatboxes" color="gray"></ion-icon>
-       {{post?.comments.length}}
+      <ion-button fill="clear" size="small" color="#FFD700">
+        <ion-icon slot="start" name="ios-chatboxes" color="#FFD700"></ion-icon>
+         {{(comments| async)?.length}}
       </ion-button>
-      <ion-button fill="clear" size="small" color="dark">
-        <ion-icon slot="start" name="ios-heart" color="gray"></ion-icon>
-        50
+      <ion-button fill="clear" size="small" color="#FFD700">
+        <ion-icon slot="start" name="ios-heart" color="#FFD700"></ion-icon>
+        {{post?.likes?.length}}
       </ion-button>
     </ion-col>
 
@@ -49,30 +49,30 @@
     </ion-col>
     <br>
   </ion-row>
-  <ion-list no-margin>
-    <h5 no-margin class="comment-header">
+  <ion-list class="ion-no-margin">
+    <h5  class=" ion-no-margin comment-header">
       <ion-icon class="text-medium" name="chatbubbles"></ion-icon>
       Comments
     </h5>
     <div>
-      <ion-item class="comment-list" *ngFor="let c of post?.comments">
+      <ion-item class="comment-list" *ngFor="let c of comments | async ">
         <ion-avatar slot="start">
-          <img [src]="c?.user.img" />
+          <img [src]="c.postUser?.img" />
         </ion-avatar>
-        <ion-label text-wrap>
-          <ion-text color="medium" float-end>
+        <ion-label class="ion-text-wrap">
+          <ion-text color="medium"  class="ion-float-end">
             <span class="text-small">
-              {{c.time.seconds *1000 | amTimeAgo}}
+              {{c.created?.seconds *1000 | amTimeAgo}}
             </span>
           </ion-text>
-           <h4>{{c?.user.name}}</h4> 
+           <h4>{{c?.postUser?.name}}</h4> 
           <ion-text color="dark">
             <div class="message">{{c?.comment}}</div>
           </ion-text>
           <p>
-          <ion-button fill="clear" size="small" color="dark">
-            <ion-icon slot="start" name="thumbs-up" color="gray"></ion-icon>
-            {{post?.comments.length}}
+          <ion-button fill="clear" size="small" color="#FFD700">
+            <ion-icon slot="start" name="thumbs-up" color="#FFD700"></ion-icon>
+            <!-- {{(comments| async)?.length}}  -->
           </ion-button>
           <ion-button fill="clear" size="small" color="dark">
             Reply
@@ -85,12 +85,12 @@
 </ion-content>
 <ion-footer class="ion-no-border">
   <ion-toolbar>
-    <form [formGroup]="addPostForm" (ngSubmit)="addComment()">
+    <form [formGroup]="addPostComment" (ngSubmit)="addComment()">
       <ion-item lines="none">
         <textarea placeholder=" your comments " #myInput id="myInput" rows="1" maxLength="500" (keyup)="resize()"
           formControlName="comment"></textarea>
         <ion-buttons slot="end">
-          <ion-button type="submit">
+          <ion-button type="submit" fill="clear" color="primary" [disabled]="!addPostComment.valid">
             Send
           </ion-button>
         </ion-buttons>

@@ -1,17 +1,22 @@
-<ion-header no-border>
-  <ion-toolbar>
+<ion-header>
+<ion-toolbar color="primary">
     <ion-title>
         <img class="title-image" src="../../../assets/imgs/white_logo.png" width="40" height="43" />
     </ion-title>
     <ion-buttons slot="end">
       <ion-button>
-        <ion-icon color="light" name="settings"></ion-icon>
+        <ion-icon name="notifications" color="light"></ion-icon>
        </ion-button>
     </ion-buttons>
-  </ion-toolbar>
+  </ion-toolbar>  
 </ion-header>
 <ion-content>
-  <div class="ion-padding content-container ">
+  <ion-slides pager="true">
+    <ion-slide *ngFor="let category of categories | async">
+      <img class="image-slide" src="{{category.img}}">
+    </ion-slide>
+  </ion-slides>
+  <div>
     <!--*********** Category  ***********-->
     <ion-item lines="none" >
       <h3 #triggerElement class="main-header5">Category</h3>
@@ -24,18 +29,18 @@
         </div>
       </ion-card>
     </div>
-    <ion-card mode="ios" *ngFor="let post of posts  | async "[routerLink]="[post.id]">
+    <ion-card mode="ios" *ngFor="let post of posts  | async " tappable>
       <ion-item lines="none">
         <ion-avatar slot="start">
-          <img [src]="post.poster.img">
+          <img [src]="post.postUser.img">
         </ion-avatar>
         <ion-buttons slot="end">
           <ion-button>
             <ion-icon slot="icon-only" color="medium" name="more"></ion-icon>
            </ion-button>
         </ion-buttons>
-        <ion-label>
-          <h3>{{post.poster.name}}</h3>
+        <ion-label [routerLink]="[post.id]">
+          <h3>{{post.postUser.name}}</h3>
           <p>{{post.created.seconds *1000 | amTimeAgo}}</p>
         </ion-label>
   
@@ -47,27 +52,25 @@
           </ion-slide>
         </ion-slides>
       </ion-item>
-      <ion-card-content>
-        <ion-card-title>
+      <ion-card-content [routerLink]="[post.id]">
+        <ion-card-title >
           <h2 class="main_header4"> {{post.title}}</h2>
         </ion-card-title>
-        <p>
-          {{post.description}}
-        </p>
+        <p [innerHTML]="post.description"></p>
       </ion-card-content>
       <ion-row>
         <ion-col>
-          <ion-button fill="clear" size="small" color="dark">
-            <ion-icon slot="start" name="ios-chatboxes" color="gray"></ion-icon>
+          <ion-button fill="clear" size="small" color="#FFD700" [routerLink]="[post.id]">
+            <ion-icon  slot="start" name="ios-chatboxes" color="gray"></ion-icon>
             {{post.comments?.length}}
           </ion-button>
-          <ion-button fill="clear" size="small" color="dark">
+          <ion-button fill="clear" size="small" color="#FFD700" (click)="lovePost(post.id)">
             <ion-icon slot="start" name="ios-heart" color="gray"></ion-icon>
-            50
+            {{post?.likes?.length}}
           </ion-button>
         </ion-col>
         <ion-col center class="ion-text-right">
-          <ion-button fill="clear" size="small" color="dark">
+          <ion-button fill="clear" size="small" color="dark" [routerLink]="[post.id]">
             REPLY
           </ion-button>
         </ion-col>

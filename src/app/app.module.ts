@@ -38,16 +38,16 @@ import { Crop } from "@ionic-native/crop/ngx";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TabsPageModule } from "./tabs/tabs.module";
 import { InAppBrowser } from "@ionic-native/in-app-browser/ngx";
-import { MyProfilePage } from "./pages/my-profile/my-profile.page";
-import { MyProfilePageModule } from "./pages/my-profile/my-profile.module";
 import { FormControl } from "@angular/forms";
 import { Autosize } from './shared/Autosize';
+import { NgxImageCompressService } from 'ngx-image-compress';
+import { SortByPipe } from './shared/SortByPipe';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
 
 @NgModule({
-  declarations: [AppComponent, Autosize ],
+  declarations: [AppComponent, Autosize, SortByPipe],
   entryComponents: [],
   imports: [
     BrowserAnimationsModule,
@@ -70,9 +70,10 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
 
   providers: [
-    StatusBar,
+    StatusBar, SortByPipe,
     FormControl,
     Camera,
+    NgxImageCompressService,
     File,
     InAppBrowser,
     Crop,

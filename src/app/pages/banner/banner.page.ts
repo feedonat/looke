@@ -62,11 +62,13 @@ export class BannerPage implements OnInit {
   }
   pickImage(sourceType) {
     const options: CameraOptions = {
-      quality: 70,
+      quality: 75,
       sourceType: sourceType,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
+      mediaType: this.camera.MediaType.PICTURE,
+      targetWidth: 600,
+      targetHeight: 600,
     }
     this.camera.getPicture(options).then(data=> {
      console.log(data);

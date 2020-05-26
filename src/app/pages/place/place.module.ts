@@ -4,9 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { PlacePageRoutingModule } from './place-routing.module';
 import { PlacePage } from './place.page';
-import { Camera } from '@ionic-native/camera/ngx';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +13,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PlacePageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [PlacePage]
+  declarations: [PlacePage],
 })
 export class PlacePageModule {}

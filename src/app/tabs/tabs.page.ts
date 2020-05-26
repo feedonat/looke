@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tabs',
@@ -11,7 +12,7 @@ export class TabsPage implements OnInit {
 
 
 
-  constructor(public platform: Platform) {}
+  constructor(public platform: Platform, private router: Router) {}
 
 
   titleLayout = 'hide';
@@ -32,4 +33,7 @@ export class TabsPage implements OnInit {
   ngOnInit() {
   }
 
+  addPost(){
+    this.router.navigateByUrl('1/post/add');
+  }
 }

@@ -8,7 +8,7 @@ import { PostDetailPageRoutingModule } from './post-detail-routing.module';
 
 import { PostDetailPage } from './post-detail.page';
 import { MomentModule } from 'ngx-moment';
-import { Autosize } from 'src/app/shared/Autosize';
+
 
 @NgModule({
   imports: [
