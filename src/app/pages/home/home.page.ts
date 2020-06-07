@@ -5,7 +5,7 @@ import {
   ElementRef,
   Renderer2,
 } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, merge } from "rxjs";
 import {
   MenuController,
   ModalController,
@@ -33,12 +33,11 @@ export class HomePage implements OnInit {
 
   //Slider configuration
   slideOptsOne = {
-    initialSlide: 1,
+    zoom: false,
     slidesPerView: 1,
-    autoplay: true,
+    spaceBetween: 57,
+    centeredSlides: true,
   };
-  // ******** for Cart ***********//
-  cart = [];
 
   private observer: IntersectionObserver;
   //********* Observable *********/
@@ -50,6 +49,7 @@ export class HomePage implements OnInit {
   banners: Observable<any[]>;
   posts: Observable<any[]>;
   isPaused = false;
+  pageSize = 10;
   constructor(
     public homePageService: HomePageService,
     public postService: PostService,
@@ -61,7 +61,7 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.categories = this.homePageService.getCategories();
     this.banners = this.homePageService.getBanners();
-    this.posts = this.postService.getPosts();
+    this.posts = this.postService.getPosts(this.pageSize);
   }
   toggleSideMenu() {
     this.menuCtrl.toggle(); //Add this method to your button click function
@@ -73,7 +73,10 @@ export class HomePage implements OnInit {
   lovePost(postID) {
     console.log("you like post with id  " + postID);
     this.postService.like(postID);
-   // this.renderer.addClass(this.heart.nativeElement, 'is_animating');
+  }
+
+  onLoadMore(event) {
+    //console.log("merged posts ---- > "+JSON.stringify(nextData));
   }
 
   //   async openSearchModal() {

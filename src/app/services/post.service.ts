@@ -38,11 +38,11 @@ export class PostService {
     post.creator = this.fireAuth.auth.currentUser.uid;
     post.poster = poster;
     post.created = firebase.firestore.FieldValue.serverTimestamp();
-    post.comments = [];
+    post.commentCount = 0;
     post.likes = [];
     const imageData = post.img;
     delete post.image;
-    console.log("post detail " + JSON.stringify(post));
+    console.log('post detail ' + JSON.stringify(post));
     let documentId = null;
     let storageRef: AngularFireStorageReference = null;
 
@@ -94,10 +94,10 @@ export class PostService {
       });
   }
 
-  getPosts() {
+  getPosts(pageSize) {
     console.log("start getPosts");
     return this.firestore
-      .collection<any>("post", (ref) => ref.orderBy("created", "desc"))
+      .collection<any>("post", (ref) => ref.orderBy("created", "desc").limit(pageSize))
       .snapshotChanges()
       .pipe(
         map((actions) => {

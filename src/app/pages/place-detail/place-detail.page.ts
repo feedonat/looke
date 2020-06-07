@@ -56,7 +56,7 @@ export class PlaceDetailPage implements OnInit {
   showToolbar = false;
   showTitle = false;
   transition: boolean = false;
-    
+  public reviews: any[] = []; 
 
   item: Observable<any>;
   itemArray: any=[]; 
@@ -79,7 +79,6 @@ export class PlaceDetailPage implements OnInit {
 
  //relatedPlaces:Observable<any[]>;
   //relatedPlacesArray: any=[];
-  reviews: Observable<any[]>;
 
   //**** User authentication  ****/
   userAuth: boolean = false; // Is user logged in ?
@@ -151,5 +150,14 @@ export class PlaceDetailPage implements OnInit {
         // 	likes: firestore.FieldValue.arrayRemove(this.user.getUID())
         // })
       }
+    }
+
+    async onDirectionsButtonTouched() {
+
+      const lat = this.place.location.latitude;
+      const lng = this.place.location.longitude;
+  
+      const url = `https://maps.google.com/maps?q=${lat},${lng}`;
+     // this.openSimpleUrl(url);
     }
   }

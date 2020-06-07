@@ -6,6 +6,8 @@ import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import * as e from "cors";
 import { PostService } from "src/app/services/post.service";
 import { Observable } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { ActionSheetController } from '@ionic/angular';
 
 @Component({
   selector: "app-post-detail",
@@ -18,12 +20,14 @@ export class PostDetailPage implements OnInit {
     private route: ActivatedRoute,
     private outhService: AuthService,
     private homePageService: HomePageService,
-    private postService: PostService
+    private postService: PostService,
+    private afAuth: AngularFireAuth,
+    private actionSheetCtrl: ActionSheetController
   ) {
     console.log("postID" + this.id);
   }
   comments: Observable<any[]>;
-  heartType: string = "heart-empty";
+  heartType: string ;
   id = null;
   post: any;
   liked: any;
@@ -36,22 +40,26 @@ export class PostDetailPage implements OnInit {
       comment: ["", Validators.required],
     });
 
-    this.id = this.route.snapshot.paramMap.get("id");
+    this.id = this.route.snapshot.paramMap.get('id');
     console.log("postID ngoninit " + this.id);
     await this.getPostDetail();
     await this.getPostComments(this.id);
   }
   resize() {
     this.myInput.nativeElement.style.height =
-      this.myInput.nativeElement.scrollHeight + "px";
+      this.myInput.nativeElement.scrollHeight + 'px';
   }
 
   async getPostDetail() {
-    this.post = await this.homePageService
+    this.post = this.homePageService
       .getOnePost(this.id)
-      .subscribe((res) => {
-        const comments = res["comments"].reverse();
-        console.log("my post with comments reverted: ", res);
+      .subscribe((res: any) => {
+        const currentUser = this.afAuth.auth.currentUser.uid;
+        console.log('current user = '+ currentUser );
+        this.heartType = res.likes.includes(currentUser) ? 'heart' : 'heart-empty';
+        this.liked = this.heartType === 'heart' ? true : false;
+        //const comments = res["comments"].reverse();
+        console.log('my post with comments reverted: ', res);
         this.post = res;
       });
   }
@@ -67,9 +75,11 @@ export class PostDetailPage implements OnInit {
   }
   toggleHeart() {
     console.log("calling toggleHeart");
-    if (this.heartType == "heart-empty") {
-      console.log("Heart ON");
-
+    if (this.heartType === "heart-empty") {
+     this.postService.like(this.id);
+    }else{
+      this.postService.disLike(this.id);
+    }
       // this.shoppingService.addWishlist(
       //   this.itemId,
       //   this.itemArray.name,
@@ -79,12 +89,32 @@ export class PostDetailPage implements OnInit {
       // this.postReference.update({
       // 	likes: firestore.FieldValue.arrayUnion(this.user.getUID())
       // })
-    } else {
-      console.log("Heart OFF");
-      // this.shoppingService.removeWishlist(this.itemId);
-      // this.postReference.update({
-      // 	likes: firestore.FieldValue.arrayRemove(this.user.getUID())
-      // })
-    }
+  }
+
+  async toggleActionSeet() {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: "Select Action",
+      buttons: [
+        {
+          text: "save post",
+          handler: () => {
+            console.log('save post ')
+            //this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
+          },
+        },
+        {
+          text: "report post",
+          handler: () => {
+            console.log('report a post')
+            //this.pickImage(this.camera.PictureSourceType.CAMERA);
+          },
+        },
+        {
+          text: "Cancel",
+          role: "cancel",
+        },
+      ],
+    });
+    await actionSheet.present();
   }
 }

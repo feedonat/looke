@@ -1,7 +1,8 @@
 <ion-header>
 <ion-toolbar color="primary">
-    <ion-title>
-        <img class="title-image" src="../../../assets/imgs/white_logo.png" width="40" height="43" />
+    <ion-title >
+      <p>Look Ethiopia</p>
+       <!-- <img class="title-image" src="../../../assets/imgs/logo.png" width="50" height="53" /> -->
     </ion-title>
     <ion-buttons slot="end">
       <ion-button>
@@ -9,17 +10,31 @@
        </ion-button>
     </ion-buttons>
   </ion-toolbar>  
-</ion-header>
+</ion-header> 
+
 <ion-content>
-  <ion-slides pager="true">
+<div>
+  <section class="heading">
+    <ion-slides [options]="slideOptsOne" pager="true" class="inner">
+      <ion-slide *ngFor="let category of categories | async">
+        <img class="image-slide" src="{{category.img}}">
+        <span class="slide-text">{{category.name}}</span>
+      </ion-slide>
+    </ion-slides>
+    <!-- <div class="inner">
+     
+    </div> -->
+  </section>
+</div>
+  <!-- <ion-slides pager="true" class="inner">
     <ion-slide *ngFor="let category of categories | async">
       <img class="image-slide" src="{{category.img}}">
     </ion-slide>
-  </ion-slides>
+  </ion-slides> -->
   <div>
     <!--*********** Category  ***********-->
-    <ion-item lines="none" >
-      <h3 #triggerElement class="main-header5">Category</h3>
+    <ion-item lines="none" class="postCategory" >
+      <p class="main-b-header6">Category</p>
     </ion-item>
     <div class="top-horizontal-scroll  slide-left">
       <ion-card tappable class="shop-main-h-card shop-card-s-wide " *ngFor="let category of categories | async"
@@ -62,7 +77,7 @@
         <ion-col>
           <ion-button fill="clear" size="small" color="#FFD700" [routerLink]="[post.id]">
             <ion-icon  slot="start" name="ios-chatboxes" color="gray"></ion-icon>
-            {{post.comments?.length}}
+            {{post?.commentCount}}
           </ion-button>
           <ion-button fill="clear" size="small" color="#FFD700" (click)="lovePost(post.id)">
             <ion-icon slot="start" name="ios-heart" color="gray"></ion-icon>
@@ -77,4 +92,7 @@
       </ion-row>
     </ion-card>
   </div>
+  <ion-infinite-scroll  (ionInfinite)="onLoadMore($event)">
+    <ion-infinite-scroll-content loadingSpinner = 'bubble' loadingText='loading more..'></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

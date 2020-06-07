@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, Validators, FormBuilder} from '@angular/forms';
 import { LoadingController, AlertController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import {
   trigger,

@@ -63,3 +63,32 @@ ion-input {
     margin-top: 64px;
     margin-left: 20px;
   }
+
+.login-box {
+  margin: 2em;
+  padding: 1em;
+  margin-top: 10vh;
+  background: #ffffffe6;
+  border-radius: 15px;
+  border: 2px solid var(--ion-color-primary);
+}
+
+ion-content {
+  --background: none;
+  background-image: url('../../../assets/imgs/login.jpg');
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+ion-item {
+  --ion-item-background: transparent;
+}
+
+.twitter-btn {
+  --background: #1DA1F2;
+}
+
+.fb-btn {
+  --background: #3C5A99;
+}

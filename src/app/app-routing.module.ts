@@ -7,8 +7,12 @@ import { HomePage } from './pages/home/home.page';
 import { MyProfilePage } from './pages/my-profile/my-profile.page';
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/1/profile/login']);
 const routes: Routes = [
-{
-   path: '1',
+
+  {
+    path: 'onboarding',
+    loadChildren: () => import('./pages/onboarding/onboarding.module').then( m => m.OnboardingPageModule)
+  },{
+    path: '1',
     component: TabsPage,
     children: [
 
@@ -34,8 +38,13 @@ const routes: Routes = [
     path: 'post',
     children: [
       {
+
+        
         path: '',
         loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
+
+       // path: '',
+       // loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
       },
       {
         path: 'add',
@@ -158,12 +167,20 @@ const routes: Routes = [
 
 {
   path: '',
-  redirectTo: '/1/post',
+  redirectTo: '/onboarding',
   pathMatch: 'full'
 },
   {
     path: 'gallery',
     loadChildren: () => import('./pages/gallery/gallery.module').then( m => m.GalleryPageModule)
+  },
+  {
+    path: 'main',
+    loadChildren: () => import('./pages/main/main.module').then( m => m.MainPageModule)
+  },
+  {
+    path: 'onboarding',
+    loadChildren: () => import('./pages/onboarding/onboarding.module').then( m => m.OnboardingPageModule)
   }
 
  ];

@@ -1,0 +1,111 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary" fixed>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    main
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <ion-grid fixed>
+
+    <ion-row class="ion-justify-content-center">
+      <ion-col class="ion-no-padding" size-xs="12" size-sm size-md size-lg="8">
+        <section class="heading">
+          <div class="inner">
+          </div>
+        </section>
+
+      </ion-col>
+    </ion-row>
+    </ion-grid>
+
+          <!-- <section class="heading">
+            <div class="inner">
+            </div>
+          </section> -->
+          <ion-list margin-top ="30">
+            <ion-item (click)="myBusiness()">
+              <ion-icon name="pin" slot="start" color="primary"></ion-icon>
+              <ion-label>
+                <p class="bold" color="dark">My Places</p>
+              </ion-label>
+              <ion-icon name="arrow-forward" slot="end"></ion-icon>
+            </ion-item>
+            <ion-item (click)="myLikes()">
+              <ion-icon name="heart" slot="start" color="primary"></ion-icon>
+              <ion-label>
+                <p color="dark">likes</p>
+              </ion-label>
+              <ion-icon name="arrow-forward" slot="end"></ion-icon>
+            </ion-item>
+            <ion-item (click)="myReview()">
+              <ion-icon name="star" slot="start" color="primary"></ion-icon>
+              <ion-label>
+                <p class="bold link text-slarge">Reviews</p>
+              </ion-label>
+              <ion-icon name="arrow-forward" slot="end"></ion-icon>
+            </ion-item>
+            <ion-item (click)="changePassword()">
+              <ion-icon name="lock" slot="start" color="primary"></ion-icon>
+              <ion-label>
+                <p class="link bold link text-slarge">Change Password</p>
+              </ion-label>
+              <ion-icon name="arrow-forward" slot="end"></ion-icon>
+            </ion-item>
+
+            <ion-item (click)="addPost()">
+              <ion-icon name="lock" slot="start" color="primary"></ion-icon>
+              <ion-label>
+                <p class="link bold link text-slarge">AddPost</p>
+              </ion-label>
+              <ion-icon name="arrow-forward" slot="end"></ion-icon>
+            </ion-item>
+
+            <ion-item (click)="banner()">
+              <ion-icon name="lock" slot="start" color="primary"></ion-icon>
+              <ion-label>
+                <p class="link bold link text-slarge">banner</p>
+              </ion-label>
+              <ion-icon name="arrow-forward" slot="end"></ion-icon>
+            </ion-item>
+
+            <ion-item (click)="postCategory()">
+              <ion-icon name="lock" slot="start" color="primary"></ion-icon>
+              <ion-label>
+                <p class="link bold link text-slarge">PostCategory</p>
+              </ion-label>
+              <ion-icon name="arrow-forward" slot="end"></ion-icon>
+            </ion-item>
+
+            <ion-item [(ngModel)]="user" (click)="onPresentEditModal(user)"[ngModelOptions]="{standalone: true}" ngDefaultControl>
+              <ion-icon name="create" slot="start" color="primary"></ion-icon>
+              <ion-label>
+                <p class="link bold link text-slarge" >Edit Profile</p>
+              </ion-label>
+              <ion-icon name="arrow-forward" slot="end"></ion-icon>
+            </ion-item>
+            <ion-item (click)="mySettings()">
+              <ion-icon name="cog" slot="start" color="primary"></ion-icon>
+              <ion-label>
+                <p class="link bold link text-slarge" color="dark">Settings</p>
+              </ion-label>
+              <ion-icon name="arrow-forward" slot="end"></ion-icon>
+            </ion-item>
+            <ion-item lines="none" (click)="onLogout()">
+              <ion-icon name="log-out" slot="start" color="primary"></ion-icon>
+              <ion-label>
+                <p class="link bold link text-slarge">Logout</p>
+              </ion-label>
+              <ion-icon name="arrow-forward" slot="end"></ion-icon>
+            </ion-item>
+          </ion-list>
+        
+    
+
+
+ 
+</ion-content>

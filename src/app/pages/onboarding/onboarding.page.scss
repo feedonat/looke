@@ -1,0 +1,24 @@
+ion-slide {
+    height: 100vh;
+    flex-direction: column;
+}
+
+.slide-1 {
+    background: var(--ion-color-primary);
+}
+
+.slide-2 {
+    background: var(--ion-color-success);
+}
+
+.slide-3 {
+    background: var(--ion-color-dark);
+}
+
+.bottom-box {
+    position: absolute;
+    bottom: 0px;
+    background: #fff;
+    width: 100%;
+    height: 25vh;
+}

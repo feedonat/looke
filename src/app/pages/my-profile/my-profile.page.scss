@@ -1,189 +1,191 @@
 .heading {
-    background: var(--ion-color-primary);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-self: center;
-    justify-content: center;
-    padding-top: 15px;
-    padding-bottom: 15px;
-  }
-  
-  ion-avatar {
-  
-    width: 100px;
-    height: 100px;
-    img {
-      background: var(--ion-color-light);
-      display: inline-block;
-      max-width: 100px;
-      max-height: 100px;
-      border-radius: 100%;
-    }
-  }
-  
-  ion-item {
-    --min-height: 64px;
-  }
-  
-  .custom-line-height {
-    line-height: 1.6;
-  }
-  
-  .skeleton-item {
-    width: auto;
-    height: auto;
-    margin: 10px auto;
-    padding: 10px;
-  
-    .wrapper {
-      display: inline-flex;
-      width: 100%;
-      height: auto;
-      flex: 1;
-  
-      .avatar {
-        width: 100px;
-        height: 90px;
-      }
-  
-      .title {
-        width: 100%;
-        padding: 10px;
-        height: 80px;
-      }
-    }
-  }
-  
-  .hero-img {
-    width: 50%;
-  }
-  
-  ion-grid {
-    padding: 0;
-  }
-  
-  @media only screen and (min-width: 768px) {
-  
-    ion-grid {
-      padding: 16px;
-    }
-  
-    .heading {
-      border-top-left-radius: 8px;
-      border-top-right-radius: 8px;
-      margin-top: 16px;
-    }
-  
-    .hero-container, .intro {
-      padding: 16px;
-    }
-  
-    .hero-img {
-      width: 90%;
-    }
-  
-    .intro {
-      display: flex;
-      align-items: center;
-      height: 100%;
-    }
-  }
-  ion-card.main-card{
-    background:linear-gradient(135deg, #61edfa 0%,#f9c453 100%);
-    border-radius: 4px 100px 10px 10px;
-    max-width:500px;
-    overflow: visible;
-    margin-top: 80px;
-  }
-  .card-img{
-    max-width:80px;
-  }
-  .card-main-content{
-    background: rgb(238, 234, 177);
-    border-radius: 4px 60px 10px 10px;
-  }
-  .card-amount{
-    --background: transparent;
-    --border-color: transparent;
-    color: #fff;
-  }
-  .card-image-blk{
-    --background: transparent;
-    --border-color: transparent;
-    margin-bottom: -30px;
-    margin-top: -30px;
-  }
+  background: var(--ion-color-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
 
+ion-avatar {
 
-  ion-content {
-    --background: url('../../../assets/imgs/999.png') no-repeat top center/cover fixed, #fff;
-    position: relative;
-    height: 100%;
+  width: 100px;
+  height: 100px;
+  img {
+    background: var(--ion-color-light);
+    display: inline-block;
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 100%;
+  }
+}
+
+ion-item {
+  --min-height: 64px;
+}
+
+.custom-line-height {
+  line-height: 1.6;
+}
+
+.skeleton-item {
+  width: auto;
+  height: auto;
+  margin: 10px auto;
+  padding: 10px;
+
+  .wrapper {
+    display: inline-flex;
     width: 100%;
+    height: auto;
+    flex: 1;
 
-    ion-button {
-        margin-top: 1em;
-        margin-bottom: 1em
+    .avatar {
+      width: 100px;
+      height: 90px;
     }
+
+    .title {
+      width: 100%;
+      padding: 10px;
+      height: 80px;
+    }
+  }
+}
+
+.hero-img {
+  width: 50%;
+}
+
+ion-grid {
+  padding: 0;
+}
+
+@media only screen and (min-width: 768px) {
+
+  ion-grid {
+    padding: 16px;
+  }
+
+  .heading {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    margin-top: 16px;
+  }
+
+  .hero-container, .intro {
+    padding: 16px;
+  }
+
+  .hero-img {
+    width: 90%;
+  }
+
+  .intro {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+}
+ion-card.main-card{
+  background:linear-gradient(135deg, #61edfa 0%,#f9c453 100%);
+  border-radius: 4px 100px 10px 10px;
+  max-width:500px;
+  overflow: visible;
+  margin-top: 80px;
+}
+.card-img{
+  max-width:80px;
+}
+.card-main-content{
+  background: rgb(238, 234, 177);
+  border-radius: 4px 60px 10px 10px;
+}
+.card-amount{
+  --background: transparent;
+  --border-color: transparent;
+  color: #fff;
+}
+.card-image-blk{
+  --background: transparent;
+  --border-color: transparent;
+  margin-bottom: -30px;
+  margin-top: -30px;
+}
+
+
+ion-content {
+  --background: url('../../../assets/imgs/999.png') no-repeat top center/cover fixed, #fff;
+  position: relative;
+  height: 100%;
+  width: 100%;
+
+  ion-button {
+      margin-top: 1em;
+      margin-bottom: 1em
+  }
 }
 
 ion-toolbar {
-  --background: transparent;
-  --border-width: 0px;
+--background: transparent;
+--border-width: 0px;
 }
 
 .card {
-    margin: 0 auto;
+  margin: 0 auto;
 
-    .header {
-        height: 200px; // 20vh;
+  .header {
+      height: 200px; // 20vh;
 
-        .avatar {
-            width: 160px; //40vw
-            height: 160px;
-            position: relative;
-            margin: 0 auto;
+      .avatar {
+          width: 160px; //40vw
+          height: 160px;
+          position: relative;
+          margin: 0 auto;
 
-            img {
-                display: block;
-                border-radius: 50%;
-                position: absolute;
-                bottom: calc(-1*(80px + 10px)); // -42px;
-                border: 5px solid #ffce00;
-                background-color: #fff;
-                height:100px;
-                width: auto;/*maintain aspect ratio*/
-                max-width:100px;
-                margin-left: 20px;
+          img {
+              display: block;
+              border-radius: 50%;
+              position: absolute;
+              bottom: calc(-1*(80px + 10px)); // -42px;
+              border: 5px solid #ffce00;
+              background-color: #fff;
+              height:100px;
+              width: 100px;/*maintain aspect ratio*/
+             // max-width:100px;
+              margin-left: 20px;
+              align-self: center;
+              
 
 
-            }
-        }
-    }
+          }
+      }
+  }
 }
 
 .card-body {
-    background-color: #ffffff;
-    padding: 5px;
-    overflow: hidden;
-    border-radius: 40px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px;
-    .user-meta {
-        padding-top: 40px;
-        .playername {
-            font-size: 24px;
-            font-weight: 600;
-            color: #303940;
-            margin-top: 10px;
-            margin-left: -30px;
-        }
-        .country {
-            font-size: 60%;
-            color: #949ea6;
-            text-transform: uppercase;
-            margin: 0 auto;
-        }
-    }
+  background-color: #ffffff;
+  padding: 5px;
+  overflow: hidden;
+  border-radius: 40px;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  .user-meta {
+      padding-top: 40px;
+      .playername {
+          font-size: 24px;
+          font-weight: 600;
+          color: #303940;
+          margin-top: 10px;
+          margin-left: -30px;
+      }
+      .country {
+          font-size: 60%;
+          color: #949ea6;
+          text-transform: uppercase;
+          margin: 0 auto;
+      }
+  }
 }

@@ -3,7 +3,7 @@
     <ion-buttons color="orange" slot="start">
       <ion-back-button color="light" defaultHref="1/post/list"></ion-back-button>
     </ion-buttons>
-    <ion-title class="main-header5">{{post?.title}}</ion-title>
+    <ion-title class="main-header5">{{post.poster?.name}}'s Post</ion-title>
     <!-- A favorite button will not show if user not login. -->
     <ion-buttons slot="end">
       <ion-button color="light" (click)="toggleHeart()">
@@ -11,7 +11,7 @@
       </ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button color="light" (click)="toggleHeart()">
+      <ion-button color="light" (click)="toggleActionSeet()">
         <ion-icon slot="icon-only" name="more"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -34,14 +34,13 @@
     <ion-col class="card-footer1">
       <ion-button fill="clear" size="small" color="#FFD700">
         <ion-icon slot="start" name="ios-chatboxes" color="#FFD700"></ion-icon>
-         {{(comments| async)?.length}}
+        {{(post?.commentCount)}} 
       </ion-button>
-      <ion-button fill="clear" size="small" color="#FFD700">
-        <ion-icon slot="start" name="ios-heart" color="#FFD700"></ion-icon>
-        {{post?.likes?.length}}
-      </ion-button>
+      <ion-button  (click)="toggleHeart()" fill="clear" size="small" color="#FFD700">
+        <ion-icon slot="start" [name]="heartType" color="#FFD700"></ion-icon>
+       {{post?.likes?.length}}
+       </ion-button>
     </ion-col>
-
     <ion-col center class="ion-text-right card-footer2">
       <ion-button fill="clear" size="small" color="dark">
         REPLY
@@ -49,7 +48,7 @@
     </ion-col>
     <br>
   </ion-row>
-  <ion-list class="ion-no-margin">
+  <ion-list *ngIf="(comments| async)?.length>0 ;else noComment" class="ion-no-margin">
     <h5  class=" ion-no-margin comment-header">
       <ion-icon class="text-medium" name="chatbubbles"></ion-icon>
       Comments
@@ -72,7 +71,7 @@
           <p>
           <ion-button fill="clear" size="small" color="#FFD700">
             <ion-icon slot="start" name="thumbs-up" color="#FFD700"></ion-icon>
-            <!-- {{(comments| async)?.length}}  -->
+            <!-- {{(c?.commentCount)}} -->
           </ion-button>
           <ion-button fill="clear" size="small" color="dark">
             Reply
@@ -82,6 +81,9 @@
       </ion-item>
     </div>
   </ion-list>
+  <ng-template #noComment>
+   <p class="no-comment">No Comment yet - be the first to give a comment !</p> 
+  </ng-template>
 </ion-content>
 <ion-footer class="ion-no-border">
   <ion-toolbar>

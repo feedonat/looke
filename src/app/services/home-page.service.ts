@@ -41,7 +41,6 @@ export class HomePageService {
   }
   getOnePost(id) {
     return this.firestore.doc(`post/${id}`).valueChanges();
-    
   }
 
 
