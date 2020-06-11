@@ -69,12 +69,12 @@
             <div class="message">{{c?.comment}}</div>
           </ion-text>
           <p>
-          <ion-button fill="clear" size="small" color="#FFD700">
-            <ion-icon slot="start" name="thumbs-up" color="#FFD700"></ion-icon>
-            <!-- {{(c?.commentCount)}} -->
+          <ion-button fill="clear" size="small" color="primary">
+            <ion-icon slot="start" name="thumbs-up" color="primary"></ion-icon>
+            {{(c?.likes.length)}}
           </ion-button>
           <ion-button fill="clear" size="small" color="dark">
-            Reply
+            <ion-icon slot="start" name="flag" color="primary"></ion-icon>
           </ion-button>
         </p>
         </ion-label>

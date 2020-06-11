@@ -73,6 +73,10 @@ export class PostDetailPage implements OnInit {
     this.postService.addComment(this.id, this.addPostComment.value);
     this.addPostComment.reset();
   }
+  toggleCommentLike() {
+     this.postService.likeThread(this.id);
+  }
+
   toggleHeart() {
     console.log("calling toggleHeart");
     if (this.heartType === "heart-empty") {
@@ -80,15 +84,6 @@ export class PostDetailPage implements OnInit {
     }else{
       this.postService.disLike(this.id);
     }
-      // this.shoppingService.addWishlist(
-      //   this.itemId,
-      //   this.itemArray.name,
-      //   this.itemArray.rating,
-      //   this.itemArray.image
-      // );
-      // this.postReference.update({
-      // 	likes: firestore.FieldValue.arrayUnion(this.user.getUID())
-      // })
   }
 
   async toggleActionSeet() {

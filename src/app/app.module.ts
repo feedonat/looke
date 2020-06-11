@@ -44,7 +44,6 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 import { SortByPipe } from './shared/SortByPipe';
 import { MainPipe } from './pages/main.pipe';
 import { IonicStorageModule } from '@ionic/storage';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
@@ -67,7 +66,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     AngularFireStorageModule,
     TabsPageModule,
     BrowserModule,
-    FontAwesomeModule,
     IonicModule,
     BrowserAnimationsModule,
     AngularFireAuthGuardModule,

@@ -42,7 +42,7 @@ export class PostService {
     post.likes = [];
     const imageData = post.img;
     delete post.image;
-    console.log('post detail ' + JSON.stringify(post));
+   // console.log('post detail ' + JSON.stringify(post));
     let documentId = null;
     let storageRef: AngularFireStorageReference = null;
 
@@ -130,9 +130,37 @@ export class PostService {
     comment.created = firebase.firestore.FieldValue.serverTimestamp();
     comment.thread = [];
     comment.likes = [];
-    console.log("post detail " + JSON.stringify(comment));
+    //console.log("post detail " + JSON.stringify(comment));
     return this.firestore.collection("post-comment").add(comment);
   }
+  addThread(id, thread) {
+    //return this.db.collection('places').add(place)
+    console.log(thread);
+    thread.creator = this.fireAuth.auth.currentUser.uid;
+    thread.postId = id;
+    thread.created = firebase.firestore.FieldValue.serverTimestamp();
+    //console.log("post detail " + JSON.stringify(comment));
+    return this.firestore.collection("comment-thread").add(thread);
+  }
+  public disLikeThread(commentId: string) {
+    this.firestore
+      .collection('post-comment')
+      .doc(commentId)
+      .ref.update({
+        likes: firebase.firestore.FieldValue.arrayRemove(this.userId),
+      });
+  }
+  // Like a post
+  public likeThread(commentId: string) {
+    this.firestore
+      .collection('post-comment')
+      .doc(commentId)
+      .ref.update({
+        likes: firebase.firestore.FieldValue.arrayUnion(this.userId),
+      });
+  }
+
+  
 
   getPostComments(postId) {
     console.log("start getComments");
@@ -162,6 +190,7 @@ export class PostService {
         flatMap((comments) => combineLatest(comments))
       );
   }
+
 
   //           //console.log("#### post  Id ="+id);
   //           const user = this.firestore.collection("users").doc(poster).valueChanges().get();

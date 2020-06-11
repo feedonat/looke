@@ -67,6 +67,7 @@ ion-icon.menu-icon {
 }
 .top-horizontal-scroll {
   margin-left: 10px;
+ // margin-bottom: 25px;
   white-space: nowrap;
   height: auto;
   overflow-x: scroll;
@@ -166,7 +167,7 @@ ion-content {
   contain: none;
 }
 ion-card {
-  border-top: 3px solid colorofyourchosing;
+  //margin-bottom: -15px;
 }
 ion-card-content:focus {
   outline: none;
@@ -224,4 +225,7 @@ ion-card-content:focus {
   position: absolute;
   margin-left: 10px;
   bottom: 20px;
+}
+ion-title{
+  margin-bottom: -5px;
 }
