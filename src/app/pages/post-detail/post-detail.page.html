@@ -32,12 +32,12 @@
   </ion-card>
   <ion-row color="light">
     <ion-col class="card-footer1">
-      <ion-button fill="clear" size="small" color="#FFD700">
-        <ion-icon slot="start" name="ios-chatboxes" color="#FFD700"></ion-icon>
+      <ion-button fill="clear" size="small" color="primary">
+        <ion-icon slot="start" name="ios-chatboxes" color="primary"></ion-icon>
         {{(post?.commentCount)}} 
       </ion-button>
       <ion-button  (click)="toggleHeart()" fill="clear" size="small" color="#FFD700">
-        <ion-icon slot="start" [name]="heartType" color="#FFD700"></ion-icon>
+        <ion-icon slot="start" [name]="heartType" color="primary"></ion-icon>
        {{post?.likes?.length}}
        </ion-button>
     </ion-col>
@@ -69,7 +69,7 @@
             <div class="message">{{c?.comment}}</div>
           </ion-text>
           <p>
-          <ion-button fill="clear" size="small" color="primary">
+          <ion-button (click)=" toggleCommentLike(c.id)" fill="clear" size="small" color="primary">
             <ion-icon slot="start" name="thumbs-up" color="primary"></ion-icon>
             {{(c?.likes.length)}}
           </ion-button>

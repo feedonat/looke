@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>community</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<ion-row class="ion-align-items-center ion-padding-start">
+  <ion-col size="6" class="ion-text-start">
+    <ion-text color="medium">
+      <span class="text-normal bold padding-small">
+        Community Links
+      </span>
+    </ion-text>
+  </ion-col>
+  <ion-col size="6" class="ion-text-end">
+    <ion-button class="ion-no-margin ion-text-capitalize" fill="clear" color="primary"
+      [routerLink]="['./places']">
+      <span class="link text-normal">
+       View All
+      </span>
+    </ion-button>
+  </ion-col>
+</ion-row>
+<ion-row class="ion-margin-bottom ion-padding-horizontal ">
+  <ion-col class="ion-col-grid" size-xs="6" size-sm="4" size-md="3" *ngFor="let b of banners | async ">
+    <ion-card mode="ios" button class="shadow ion-no-margin ion-margin-bottom" [color]="color">
+      <img class="image-slide" src="{{b.img}}">
+    <ion-card-content>
+      <div class="ion-text-nowrap">
+        <ion-text color="primary">
+          <h3 class="bold ellipsis">{{ b.title }}</h3>
+        </ion-text>
+        <p class="ellipsis text-small bold">
+          <ion-text color="medium">
+            <span class="bold">{{ b?.subtitle }}</span>
+          </ion-text>
+        </p>
+      </div>
+    </ion-card-content>
+    </ion-card>
+  </ion-col>
+</ion-row>
+
+
+</ion-content>

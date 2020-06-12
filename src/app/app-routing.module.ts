@@ -35,6 +35,11 @@ const routes: Routes = [
   },
   
   {
+    path: 'community',
+    loadChildren: () => import('./pages/community/community.module').then( m => m.CommunityPageModule)
+  },
+
+  {
     path: 'post',
     children: [
       {
@@ -182,6 +187,8 @@ const routes: Routes = [
     path: 'onboarding',
     loadChildren: () => import('./pages/onboarding/onboarding.module').then( m => m.OnboardingPageModule)
   },
+  
+
 
  ];
 

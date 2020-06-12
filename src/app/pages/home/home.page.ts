@@ -12,6 +12,7 @@ import {
   IonContent,
   Platform,
   NavController,
+  ActionSheetController,
 } from "@ionic/angular";
 import { ActivatedRoute, Router } from "@angular/router";
 import { HideHeaderConfig } from "src/app/shared/hide-header.directive";
@@ -56,8 +57,9 @@ export class HomePage implements OnInit {
     public menuCtrl: MenuController,
     private navController: NavController,
     public router: Router,
-    private renderer: Renderer2
-  ) {}
+    private renderer: Renderer2,
+    private actionSheetCtrl: ActionSheetController
+  ) { }
   ngOnInit() {
     this.categories = this.homePageService.getCategories();
     this.banners = this.homePageService.getBanners();
@@ -74,6 +76,52 @@ export class HomePage implements OnInit {
     console.log("you like post with id  " + postID);
     this.postService.like(postID);
   }
+  async toggleActionSeet() {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: "Select Action",
+      buttons: [
+        {
+          text: "save post",
+          handler: () => {
+            console.log('save post ')
+            //this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
+          },
+        },
+
+        {
+          text: "Share post",
+          handler: () => {
+            console.log('report a post')
+            //this.pickImage(this.camera.PictureSourceType.CAMERA);
+          }
+        },
+
+        {
+          text: "Hide this kind of post",
+          handler: () => {
+            console.log('report a post')
+            //this.pickImage(this.camera.PictureSourceType.CAMERA);
+          }
+        },
+        {
+          text: "report post",
+          handler: () => {
+            console.log('report a post')
+            //this.pickImage(this.camera.PictureSourceType.CAMERA);
+          }
+        },
+        {
+          text: "Cancel",
+          role: "cancel",
+        },
+      ],
+    });
+    await actionSheet.present();
+  }
+
+
+
+
 
   onLoadMore(event) {
     //console.log("merged posts ---- > "+JSON.stringify(nextData));

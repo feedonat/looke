@@ -73,8 +73,9 @@ export class PostDetailPage implements OnInit {
     this.postService.addComment(this.id, this.addPostComment.value);
     this.addPostComment.reset();
   }
-  toggleCommentLike() {
-     this.postService.likeThread(this.id);
+  toggleCommentLike(commentId) {
+    console.log("comment id " +commentId)
+     this.postService.likeThread(commentId);
   }
 
   toggleHeart() {
@@ -96,6 +97,13 @@ export class PostDetailPage implements OnInit {
             console.log('save post ')
             //this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
           },
+        },
+        {
+          text: "Share post",
+          handler: () => {
+            console.log('report a post')
+            //this.pickImage(this.camera.PictureSourceType.CAMERA);
+          }
         },
         {
           text: "report post",

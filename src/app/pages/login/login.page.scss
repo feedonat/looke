@@ -1,10 +1,10 @@
 ion-input {
-    background: #fafaf8;
+    background: #ebebe1;
     border-radius: 10px;
     margin-top: 6px;
     --padding-start: 6px !important;
   }
-  
+
   
   /* entire container, keeps perspective */
   .flip-container {
@@ -75,7 +75,7 @@ ion-input {
 
 ion-content {
   --background: none;
-  background-image: url('../../../assets/imgs/addis.jpg');
+  background-image: url('../../../assets/imgs/loginBG.jpg');
   background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;
