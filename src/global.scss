@@ -37,6 +37,19 @@
   user-select: text;
 }
 
+app-place-list {
+  ion-searchbar {
+      .searchbar-input-container {
+          input {
+              box-shadow: none !important;
+              padding: 0 !important;
+              font-size: .78rem !important;
+          }
+      }
+  }
+}
+
+
   // .swiper-pagination .swiper-pagination-bullet {
   //   color: #ffffff;
   //   opacity: 1;

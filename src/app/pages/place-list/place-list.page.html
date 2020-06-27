@@ -5,16 +5,168 @@
 </ion-header>
 
 <ion-content>
+  <div class="banner">
+    <div class="banner_img">
+      <img src="assets/imgs/banner.png" />
+    </div>
+    <div class="banner_text">
+      <ion-row>
+        <ion-col size="8">
+          <h2>Learn from Basics</h2>
+          <h1>Full UI/UX Designs</h1>
+        </ion-col>
+        <ion-col size="4" background="primary">
+          <h4>Know more</h4>
+        </ion-col>
+      </ion-row>
+    </div>
+    <div class="search_box d-flex">
+      <ion-icon color="primary" name="search"></ion-icon>
+      <ion-searchbar
+        class="ion-no-padding"
+        searchIcon="hide"
+        placeholder="Search for course, mentor, topic, etc."
+      ></ion-searchbar>
+    </div>
+  </div>
 
-  <ion-list>
+  <ion-list lines="none">
+    <h2>Ongoing courses <span>View all</span></h2>
+    <ion-item>
+      <div class="item_inner">
+        <div class="img_box">
+          <img src="assets/imgs/k_1.png" />
+        </div>
+        <div class="item_details">
+          <h3>UX Design - From Wireframe to Prototype logo UX Design</h3>
+          <h4>Sam Smith</h4>
+          <div class="courses_completed">
+            <p class="ion-text-end">35% Completed</p>
+            <div class="courses_completed_rang">
+              <div class="completed" style="width: 35%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <div class="top_categories">
+    <h2 class="d-flex">Top Categories <span>View all</span></h2>
+
+    <ion-row>
+      <ion-col size="6">
+        <div class="categori_box">
+          <img src="assets/imgs/c1.jpg" />
+          <div class="text">
+            <h2>Design</h2>
+            <p>125 Courses</p>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col size="6">
+        <div class="categori_box">
+          <img src="assets/imgs/c3.jpg" />
+          <div class="text">
+            <h2>Business</h2>
+            <p>125 Courses</p>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col size="6">
+        <div class="categori_box">
+          <img src="assets/imgs/c4.jpg" />
+          <div class="text">
+            <h2>Development</h2>
+            <p>199 Courses</p>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col size="6">
+        <div class="categori_box">
+          <img src="assets/imgs/c2.jpg" />
+          <div class="text">
+            <h2>Photography</h2>
+            <p>201 Courses</p>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col size="6">
+        <div class="categori_box">
+          <img src="assets/imgs/c5.jpg" />
+          <div class="text">
+            <h2>Fitness</h2>
+            <p>112 Courses</p>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col size="6">
+        <div class="categori_box">
+          <img src="assets/imgs/c6.jpg" />
+          <div class="text">
+            <h2>Music</h2>
+            <p>156 Courses</p>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+  <ion-row class="ion-align-items-center ion-padding-start">
+    <ion-col size="6" class="ion-text-start">
+      <ion-text color="medium">
+        <span class="text-normal bold padding-small">
+          Local Businesses
+        </span>
+      </ion-text>
+    </ion-col>
+    <ion-col size="6" class="ion-text-end">
+      <ion-button class="ion-no-margin ion-text-capitalize" fill="clear" color="primary"
+        [routerLink]="['./places']">
+        <span class="link text-normal">
+         View All
+        </span>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-margin-bottom ion-padding-horizontal">
+    <ion-col
+      size-xs="6"
+      size-sm="4"
+      size-md="3"
+      *ngFor="let p of places | async" [routerLink]="[p.id]"
+    >
+      <ion-card
+        mode="ios"
+        button
+        class="shadow ion-no-margin ion-margin-bottom"
+        [color]="color"
+      >
+        <img class="busImg" src="{{p.img}}" />
+        <ion-card-content>
+          <div class="ion-text-nowrap">
+            <ion-text color="primary">
+              <h3 class="bold ellipsis">{{ p.name }}</h3>
+            </ion-text>
+            <!-- <p class="ellipsis text-small bold">
+              <ion-text color="medium">
+                {{ (p?.description.length>30)? (p.description | slice:0:30)+'..':('Read more') }}
+              </ion-text>
+            </p> -->
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <!-- <ion-list>
     <ion-item *ngFor="let p of places | async" [routerLink]="[p.id]">
       <ion-thumbnail slot="start" *ngIf="p.img">
-        <img [src]="p.img">
+        <img [src]="p.img" />
       </ion-thumbnail>
       <ion-label>
         {{ p.name }}
         <p>{{ p.description}}</p>
       </ion-label>
     </ion-item>
-  </ion-list>
+  </ion-list> -->
 </ion-content>
