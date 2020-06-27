@@ -1,6 +1,6 @@
+import { GeolocationService } from 'src/app/services/geolocation.service';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { LoginPage } from '../login/login.page';
 import { ModalController, LoadingController, NavController } from '@ionic/angular';
 import { NavigationExtras, Router } from '@angular/router';
 
@@ -13,17 +13,20 @@ export class MyProfilePage implements OnInit {
 
   private loader: any;
   private user :any;
+  private mylocation ;
   constructor(private outhService : AuthService,
      protected modalCtrl: ModalController, 
      private loadingCtrl: LoadingController,
      private navCntr: NavController,
+     private geolocationService : GeolocationService,
      private router: Router) { }
 
   enableMenuSwipe() {
     return true;
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.geolocationService.locate();
     this.user = this.outhService.getCurrentUser().subscribe(user=>{
       this.user = user;
     });
