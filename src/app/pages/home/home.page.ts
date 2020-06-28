@@ -20,6 +20,7 @@ import { IonicComponentService } from "src/app/services/ionic-component.service"
 import { HomePageService } from "src/app/services/home-page.service";
 import { PostService } from "src/app/services/post.service";
 import { PostDetailPage } from "../post-detail/post-detail.page";
+import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: "app-home",
@@ -58,7 +59,8 @@ export class HomePage implements OnInit {
     private navController: NavController,
     public router: Router,
     private renderer: Renderer2,
-    private actionSheetCtrl: ActionSheetController
+    private actionSheetCtrl: ActionSheetController,
+    private themeSwitcher: ThemeService
   ) { }
   ngOnInit() {
     this.categories = this.homePageService.getCategories();
@@ -141,4 +143,20 @@ export class HomePage implements OnInit {
   //     this.router.navigateByUrl('/'+url+'/'+itemId);
   //   }
   // }
+
+
+  ThemeSwitcher() {
+    // 0 = day mode
+    // 1 = night mode
+    console.log('Swich theme handler');
+    if (this.themeSwitcher.currentTheme === 0) {
+      this.themeSwitcher.setTheme('night');
+      this.themeSwitcher.currentTheme = 1;
+      console.log(this.themeSwitcher.currentTheme);
+    } else {
+      console.log(this.themeSwitcher.currentTheme);
+      this.themeSwitcher.setTheme('day');
+      this.themeSwitcher.currentTheme = 0;
+    }
+  }
 }
