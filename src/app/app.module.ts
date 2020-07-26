@@ -1,3 +1,4 @@
+
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouteReuseStrategy, Router } from "@angular/router";
@@ -35,7 +36,6 @@ import {
 import { Camera } from "@ionic-native/camera/ngx";
 import { File } from "@ionic-native/file/ngx";
 import { Crop } from "@ionic-native/crop/ngx";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TabsPageModule } from "./tabs/tabs.module";
 import { InAppBrowser } from "@ionic-native/in-app-browser/ngx";
 import { FormControl } from "@angular/forms";
@@ -44,6 +44,7 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 import { SortByPipe } from './shared/SortByPipe';
 import { MainPipe } from './pages/main.pipe';
 import { IonicStorageModule } from '@ionic/storage';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
@@ -52,7 +53,6 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [AppComponent, Autosize, SortByPipe, MainPipe],
   entryComponents: [],
   imports: [
-    BrowserAnimationsModule,
     BrowserModule,
     TranslateModule,
     IonicModule.forRoot({

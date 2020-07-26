@@ -24,10 +24,19 @@ import { environment } from "src/environments/environment";
 import { GeolocationService } from "src/app/services/geolocation.service";
 import { MapStyle } from "src/app/services/map-style";
 import { NgxImageCompressService } from "ngx-image-compress";
+import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 @Component({
   selector: "app-place",
   templateUrl: "./place.page.html",
   styleUrls: ["./place.page.scss"],
+  animations: [
+    trigger('staggerIn', [
+      transition('* => *', [
+        query(':enter', style({ opacity: 0, transform: `translate3d(0,10px,0)` }), { optional: true }),
+        query(':enter', stagger('100ms', [animate('300ms', style({ opacity: 1, transform: `translate3d(0,0,0)` }))]), { optional: true })
+      ])
+    ])
+  ]
 })
 export class PlacePage implements OnInit {
   @ViewChild("fileInput", { static: false }) fileInput: ElementRef;
