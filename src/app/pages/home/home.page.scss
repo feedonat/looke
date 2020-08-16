@@ -229,3 +229,30 @@ ion-card-content:focus {
 ion-title{
   margin-bottom: -5px;
 }
+.ion-slides-group{
+  ion-slide {
+    ion-card{
+      ion-item{
+        width: 150px;
+      }
+      height: 50px;
+      margin-bottom: 10px;
+      margin-top: 10px;
+      word-wrap: break-wonord;
+  }
+    img{
+      height: 30px;
+      width: 30px;
+      border-radius: 10px;
+      display: block;
+      margin-right: 10px;
+      margin-left: 2px;
+  }
+}
+}
+
+  .ion-card-header {
+      height: 180px;
+      width: 150px;
+      margin-bottom: 10px;
+      }
