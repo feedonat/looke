@@ -36,9 +36,16 @@ export class HomePage implements OnInit {
   //Slider configuration
   slideOptsOne = {
     zoom: false,
-    slidesPerView: 3,
-    spaceBetween: 57,
-    centeredSlides: true,
+    slidesPerView: 2.5,
+    spaceBetween: -20,
+    centeredSlides: false,
+  };
+  
+  sliderConfig = {
+    zoom: false,
+    slidesPerView: 3.5,
+    spaceBetween: -25,
+    centeredSlides: false,
   };
 
   private observer: IntersectionObserver;

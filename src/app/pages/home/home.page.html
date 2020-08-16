@@ -13,17 +13,18 @@
 
 <ion-content>
 <div>
-  <section class="heading">
-    <ion-slides [options]="slideOptsOne" pager="true" class="inner">
-      <ion-slide *ngFor="let category of categories | async">
-        <img class="image-slide" src="{{category.img}}">
-        <span class="slide-text">{{category.name}}</span>
+ <section class="heading"> 
+    <ion-slides [options]="slideOptsOne">
+      <ion-slide class="ion-slide-header" *ngFor="let category of categories | async">
+        <ion-card mode="ios" class="ion-card-header">
+          <img class="image-slide" src="{{category.img}}">
+        </ion-card>
       </ion-slide>
     </ion-slides>
     <!-- <div class="inner">
      
     </div> -->
-  </section>
+   </section>
 </div>
   <!-- <ion-slides pager="true" class="inner">
     <ion-slide *ngFor="let category of categories | async">
@@ -31,18 +32,20 @@
     </ion-slide>
   </ion-slides> -->
   <div>
-    <!--*********** Category  ***********-->
-    <ion-item lines="none" class="postCategory" >
-      <p class="main-b-header6">Category</p>
-    </ion-item>
-    <div class="top-horizontal-scroll  slide-left">
-      <ion-card tappable class="shop-main-h-card shop-card-s-wide " *ngFor="let category of categories | async"
-        (click)="openDetail('side-menu/shopping/tabs/tab1/shopping-item',category.id)">
-        <div class="card-s-wide-bg ion-text-uppercase" [ngStyle]="{'background-image': 'url(' + category.img+ ')'}">
-          <h2 class="card-s-wide-title"> {{category.name}}</h2>
-        </div>
-      </ion-card>
-    </div>
+       <!--*********** Category  ***********-->
+       <ion-item lines="none" class="postCategory" >
+        <p class="main-b-header6">Category</p>
+      </ion-item>
+      <div class="top-horizontal-scroll  slide-left">
+        <ion-card tappable class="shop-main-h-card shop-card-s-wide " *ngFor="let category of categories | async"
+          (click)="openDetail('side-menu/shopping/tabs/tab1/shopping-item',category.id)">
+          <div class="card-s-wide-bg ion-text-uppercase" [ngStyle]="{'background-image': 'url(' + category.img+ ')'}">
+            <h2 class="card-s-wide-title"> {{category.name}}</h2>
+          </div>
+        </ion-card>
+      </div>
+
+   
     <ion-card mode="ios" *ngFor="let post of posts  | async " tappable>
       <ion-item lines="none">
         <ion-avatar slot="start">
