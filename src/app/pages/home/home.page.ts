@@ -36,7 +36,7 @@ export class HomePage implements OnInit {
   //Slider configuration
   slideOptsOne = {
     zoom: false,
-    slidesPerView: 1,
+    slidesPerView: 3,
     spaceBetween: 57,
     centeredSlides: true,
   };

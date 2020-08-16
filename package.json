@@ -57,6 +57,7 @@
     "css-star-rating": "^1.2.4",
     "firebase": "^7.15.1",
     "httpclient": "^0.1.0",
+    "ios-deploy": "^1.11.0",
     "moment": "^2.26.0",
     "ng-lazyload-image": "^7.1.0",
     "ngp-sort-pipe": "0.0.4",

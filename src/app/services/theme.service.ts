@@ -48,7 +48,7 @@ export class ThemeService {
           { themeVariable: '--ion-tabbar-background-color', value: '#222428'},
           { themeVariable: '--ion-tabbar-ios-text-color-active', value: '#ffffff'},
           { themeVariable: '--ion-tabbar-md-text-color-active', value: '#ffffff'},
-          { themeVariable: '--ion-background-color', value: '#383838'},
+          { themeVariable: '--ion-background-color', value: '#303030'},
           { themeVariable: '--darkToLight', value: '#ffffff'},
           { themeVariable: '--lightToDark', value: '#222222'},
           { themeVariable: '--grey', value: '#ffffff'},
