@@ -1,0 +1,97 @@
+// .card {
+//   margin: 0 auto;
+//   .header {
+//     height: 200px; // 20vh;
+
+//     .avatar {
+//       width: 160px; //40vw
+//       height: 160px;
+//       position: relative;
+//       margin: 0 auto;
+
+//       img {
+//         display: block;
+//         border-radius: 50%;
+//         position: absolute;
+//         bottom: calc(-1 * (80px + 10px)); // -42px;
+//         border: 5px solid #ffce00;
+//         background-color: #fff;
+//         height: 100px;
+//         width: 100px; /*maintain aspect ratio*/
+//         // max-width:100px;
+//         margin-left: 20px;
+//         align-self: center;
+//       }
+//     }
+//   }
+// }
+
+// .card-body {
+//   background-color: #ffffff;
+//   padding: 5px;
+//   overflow: hidden;
+//   border-radius: 40px;
+//   border-bottom-right-radius: 0px;
+//   border-bottom-left-radius: 0px;
+//   .user-meta {
+//     padding-top: 40px;
+//     .playername {
+//       font-size: 24px;
+//       font-weight: 600;
+//       color: #303940;
+//       margin-top: 10px;
+//       margin-left: -30px;
+//     }
+//     .country {
+//       font-size: 60%;
+//       color: #949ea6;
+//       text-transform: uppercase;
+//       margin: 0 auto;
+//     }
+//   }
+// }
+
+      ion-slide {
+        ion-card {
+          ion-item {
+            width: 150px;
+            border-bottom: 2px dashed var(--ion-color-medium);
+            
+          }
+          height: 60px;
+          width: 100px;
+          margin-bottom: 10px;
+          margin-top: 10px;
+          word-wrap: break-wonord;
+        }
+        img {
+          height: 40px;
+          width: 40px;
+          border-radius: 50px;
+          padding: 2px;
+          border: 1px solid #ffce00;
+          background-color: #fff;
+          display: block;
+          margin-right: 10px;
+          margin-left: 2px;
+        }
+      }
+      // :host {
+      //   ion-item {
+      //       border-bottom: 2px dashed var(--ion-color-medium);
+      //   }
+      // }
+
+        ion-card-content{
+          padding: 15px;
+          p{
+            font-weight: 600;
+          }
+          h3{
+            font-style: normal;
+            font-weight: 600;
+            margin-left: 25px;
+            margin-top: 15px;
+          }
+        }
+       

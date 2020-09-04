@@ -4,26 +4,9 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-<ion-row class="ion-align-items-center ion-padding-start">
-  <ion-col size="6" class="ion-text-start">
-    <ion-text color="medium">
-      <span class="text-normal bold padding-small">
-        Community Links
-      </span>
-    </ion-text>
-  </ion-col>
-  <ion-col size="6" class="ion-text-end">
-    <ion-button class="ion-no-margin ion-text-capitalize" fill="clear" color="primary"
-      [routerLink]="['./places']">
-      <span class="link text-normal">
-       View All
-      </span>
-    </ion-button>
-  </ion-col>
-</ion-row>
-<ion-row class="ion-margin-bottom ion-padding-horizontal">
-  <ion-col size-xs="6" size-sm="4" size-md="3" *ngFor="let b of banners | async ">
-    <ion-card mode="ios" button class="shadow ion-no-margin ion-margin-bottom" [color]="color">
+  <!-- <ion-row class="ion-margin-bottom ion-padding-horizontal">
+  <ion-col size-xs="6" size-sm="4" size-md="3" *ngFor="let b of users | async ">
+    <ion-card mode="ios" button class="shadow ion-no-margin ion-margin-bottom">
       <img class="image-slide" src="{{b.img}}">
     <ion-card-content>
       <div class="ion-text-nowrap">
@@ -39,7 +22,35 @@
     </ion-card-content>
     </ion-card>
   </ion-col>
-</ion-row>
-
-
+</ion-row> -->
+  <ion-card mode="ios"
+  button
+  class="shadow ion-no-margin ion-margin-bottom" *ngFor="let u of users | async " tappable >
+    <ion-card-content [routerLink]="[u.id]">
+      <ion-row>
+        <ion-col size="4">
+          <img [src]="u?.img ? u.img : './assets/img/avatar.png'" alt="" [routerLink]="[u.id]">
+        </ion-col>
+        <ion-col>
+          <ion-list lines="none">
+            <ion-item>
+              <h2>{{ u.name }}</h2>
+            </ion-item>
+            <ion-item>
+              <ion-icon name="pin" color="primary"></ion-icon>
+              <p>Dallas</p>
+            </ion-item>
+            <ion-item>
+              <ion-button>
+              contact
+            </ion-button>
+              <ion-button><ion-icon ios="ios-person-add" md="md-person-add">
+                </ion-icon> Add 
+              </ion-button>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

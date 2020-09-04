@@ -2,6 +2,7 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouteReuseStrategy, Router } from "@angular/router";
+import { Facebook} from "@ionic-native/facebook/ngx";
 import {
   IonicModule,
   IonicRouteStrategy,
@@ -74,7 +75,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
   providers: [
     StatusBar, SortByPipe,
-    FormControl,
+    FormControl,Facebook,
     Camera,
     NgxImageCompressService,
     File,

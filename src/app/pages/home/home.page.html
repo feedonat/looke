@@ -14,33 +14,69 @@
 <ion-content>
 <div>
  <section class="heading"> 
-    <ion-slides [options]="slideOptsOne">
+  <div class="top-horizontal-scroll  slide-left">
+    <ion-card  tappable class="shop-main-h-card shop-card-s-wide-header " *ngFor="let category of categories | async" 
+    [routerLink]="[category.id]">
+      <div class="card-s-wide-bg-header" [ngStyle]="{'background-image': 'url(' + category.img+ ')'}">
+       <div class="header-widg-text">{{category.name}}
+       <p class="ion-text-wrap">Thing gose here someone will come and get you </p>
+    </div>
+      </div>
+    </ion-card>
+  </div>
+    <!-- <ion-slides [options]="slideOptsOne">
       <ion-slide class="ion-slide-header" *ngFor="let category of categories | async">
-        <ion-card mode="ios" class="ion-card-header">
+        <ion-card mode="ios">
           <img class="image-slide" src="{{category.img}}">
         </ion-card>
       </ion-slide>
-    </ion-slides>
+    </ion-slides> -->
     <!-- <div class="inner">
      
     </div> -->
    </section>
+
+   <!-- <section>
+
+    <div class="ion-margin-bottom">
+      <ion-row class="ion-padding-start scrollable" (scroll)="onScroll()">
+        <ion-col size-xs="5" size-sm="4" size-md="3" *ngFor="let category of categories | async">
+          <ion-card button class="shadow ion-no-margin ion-margin-bottom">
+            <img class="bg-img" src="{{category.img}}">
+            <ion-card-content>
+              <div class="ion-text-nowrap">
+                <ion-text color="primary">
+                  <h3 class="bold ellipsis">{{ category.name }}</h3>
+                </ion-text>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </div>
+
+  </section>
+ -->
+
+
+
+
 </div>
   <!-- <ion-slides pager="true" class="inner">
     <ion-slide *ngFor="let category of categories | async">
       <img class="image-slide" src="{{category.img}}">
     </ion-slide>
   </ion-slides> -->
-  <div>
+  <div class="home-content">
        <!--*********** Category  ***********-->
-       <ion-item lines="none" class="postCategory" >
+       <ion-item lines="none">
         <p class="main-b-header6">Category</p>
       </ion-item>
       <div class="top-horizontal-scroll  slide-left">
-        <ion-card tappable class="shop-main-h-card shop-card-s-wide " *ngFor="let category of categories | async"
-          (click)="openDetail('side-menu/shopping/tabs/tab1/shopping-item',category.id)">
-          <div class="card-s-wide-bg ion-text-uppercase" [ngStyle]="{'background-image': 'url(' + category.img+ ')'}">
-            <h2 class="card-s-wide-title"> {{category.name}}</h2>
+        <ion-card tappable class="shop-main-h-card shop-card-s-wide " *ngFor="let category of groups | async"
+          (click)="openDetail(category.id)">
+          <div class="card-s-wide-bg ion-text-uppercase" [ngStyle]="{'background-image': 'url(' + category.coverImg+ ')'}">
+            <h2 class="card-s-wide-title"> {{category.groupName}}</h2>
           </div>
         </ion-card>
       </div>
@@ -56,7 +92,7 @@
             <ion-icon slot="icon-only" color="medium" name="more"></ion-icon>
            </ion-button>
         </ion-buttons>
-        <ion-label [routerLink]="[post.id]">
+        <ion-label class="post-header" [routerLink]="[post.id]">
           <h3>{{post.postUser.name}}</h3>
           <p>{{post.created.seconds *1000 | amTimeAgo}}</p>
         </ion-label>

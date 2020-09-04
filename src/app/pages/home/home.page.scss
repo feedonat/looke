@@ -11,12 +11,12 @@
 //   // box-shadow: 0px 10px 10px 0px rgba(211, 205, 171, 0.3);
 //   // background: linear-gradient(135deg, #fad961 0%, #f8ae46 100%);
 // }
-ion-title{
-    text-align: center;
-    p{
-      font-weight: 700;
-      color: #fff;
-    }
+ion-title {
+  text-align: center;
+  p {
+    font-weight: 700;
+    color: #fff;
+  }
 }
 .image-slide {
   max-width: 100vw !important;
@@ -67,7 +67,7 @@ ion-icon.menu-icon {
 }
 .top-horizontal-scroll {
   margin-left: 10px;
- // margin-bottom: 25px;
+  // margin-bottom: 25px;
   white-space: nowrap;
   height: auto;
   overflow-x: scroll;
@@ -90,6 +90,16 @@ ion-icon.menu-icon {
   //min-height: 150vh !important;
   //max-height: 160vh !important;
 }
+.shop-card-s-wide-header {
+  position: relative;
+  border-radius: 8px !important;
+  width: 200px !important;
+  height: 220px !important;
+  margin: 0px 5px 0px 5px !important;
+  background-color: #dddddd;
+  //min-height: 150vh !important;
+  //max-height: 160vh !important;
+}
 
 ion-avatar {
   width: 20px;
@@ -106,15 +116,56 @@ ion-avatar {
   background-size: cover;
   background-position: center;
 }
+
+.card-s-wide-bg-header {
+  position: relative;
+  height: 220px !important;
+  background-color: #dddddd;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-position: center;
+}
+
+.header-widg-text {
+  p {
+    font-size: 16px;
+    font-weight: bold;
+    font-style: normal;
+  }
+  width: 190px;
+  padding: 0px 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: break-word;
+  color: #ffffff;
+  position: absolute;
+  margin-top: 110px;
+}
+.post-header {
+  p {
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+  }
+  h3 {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: normal;
+    text-overflow: ellipsis;
+  }
+}
+
 .card-s-wide-bg .card-s-wide-title {
   width: 149px;
   padding: 0px 16px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis; // This is where the magic happens
-  // font-family:roboto;
   font-size: 17px;
-  // font-weight:700;
+  font-weight: bold;
+  font-style: normal;
   color: #ffffff;
   position: absolute;
   top: 18%;
@@ -183,76 +234,71 @@ ion-card-content:focus {
 }
 .heading {
   background: var(--ion-color-primary);
-  display:block;
+  display: block;
   flex-direction: column;
   align-items: center;
   align-self: center;
   height: 110px;
   justify-content: center;
   padding-top: 20px;
-  padding-bottom: 40px;
-  margin-bottom:50px ;
-  border-bottom-right-radius: 30px;
-     .inner{
-         //display: block;
-         background-color: #fff;
-         //position: absolute;
-         //width: 340px;
-         height: 250px;
-         //max-height: 200px;
-         //max-width: 300px;
-         border-radius: 10px;
-         box-shadow:0px 0px 5px 0px rgba(50, 50, 50, 0.26);
-         contain: none;
-        // padding: 30px;
-         margin-top: -20px;
-         margin-bottom: 10px;
-         align-self: center;
-         margin-left: 15px;
-         margin-right: 15px;
-     }
+  padding-bottom: 30px;
+  margin-bottom: 50px;
+  border-bottom-right-radius: 40px;
+  border-bottom-left-radius: 40px;
+  .inner {
+    //display: block;
+    background-color: #fff;
+    //position: absolute;
+    //width: 340px;
+    height: 250px;
+    //max-height: 200px;
+    //max-width: 300px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.26);
+    contain: none;
+    // padding: 30px;
+    margin-top: -20px;
+    margin-bottom: 10px;
+    align-self: center;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
 }
 
-.postCategory{
- margin-top: 130px;
- padding: 6px;
- font-weight: 800;
+.home-content {
+  margin-top: 135px;
+  padding: 6px;
 }
 
-.slide-text{ 
+.slide-text {
   color: white;
   font-weight: 800;
   position: absolute;
   margin-left: 10px;
   bottom: 20px;
 }
-ion-title{
+ion-title {
   margin-bottom: -5px;
 }
-.ion-slides-group{
+.ion-slides-group {
   ion-slide {
-    ion-card{
-      ion-item{
+    ion-card {
+      ion-item {
         width: 150px;
       }
-      height: 50px;
+      height: 60px;
+      width: 100px;
       margin-bottom: 10px;
       margin-top: 10px;
       word-wrap: break-wonord;
-  }
-    img{
+    }
+    img {
       height: 30px;
       width: 30px;
       border-radius: 10px;
       display: block;
       margin-right: 10px;
       margin-left: 2px;
+    }
   }
 }
-}
-
-  .ion-card-header {
-      height: 180px;
-      width: 150px;
-      margin-bottom: 10px;
-      }

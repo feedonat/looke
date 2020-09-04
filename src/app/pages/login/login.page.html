@@ -31,16 +31,19 @@
                 Sign in
                 </ion-button>
      
+                <ion-item align-items-center lines ="none">
+                  <p align-items-center>Or Login With</p></ion-item>
                 <ion-row>
                   <ion-col size="6">
                     
-                    <ion-button expand="block" shape="round" class="fb-btn">
+                    <ion-button (click)="fbLogin()" expand="block" shape="round" class="fb-btn">
                       <ion-icon name="logo-facebook"></ion-icon>
                     </ion-button>
                   </ion-col>
+                  
                   <ion-col size="6">
-                    <ion-button expand="block" shape="round" class="twitter-btn">
-                      <ion-icon name="logo-twitter"></ion-icon>
+                    <ion-button shape="round" class="twitter-btn">
+                    <ion-icon name="logo-twitter"></ion-icon>
                     </ion-button>
                   </ion-col>
                 </ion-row>

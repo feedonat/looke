@@ -26,8 +26,33 @@
 @import "~@ionic/angular/css/flex-utils.css";
 @import 'assets/scss/animations.scss';
 
+@font-face {
+  font-family: 'My Custom Font';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./assets/fonts/roboto/RobotoCondensed-Regular.ttf');
+}
 
+@font-face {
+  font-family: 'My Custom Font';
+  font-style: normal;
+  font-weight: bold;
+  src: url('./assets/fonts/roboto/ArchivoBlack-Regular.ttf');
+}
 
+@font-face {
+  font-family: 'My Custom Font';
+  font-style: italic;
+  font-weight: normal;
+  src: url('./assets/fonts/roboto/RobotoCondensed-Italic.ttf');
+}
+
+@font-face {
+  font-family: 'My Custom Font';
+  font-style: italic;
+  font-weight: bold;
+  src: url('./assets/fonts/roboto/RobotoCondensed-BoldItalic.ttf');
+}
 
 @import '~quill/dist/quill.core.css';
 @import '~quill/dist/quill.snow.css';

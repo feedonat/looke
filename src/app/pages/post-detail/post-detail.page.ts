@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { HomePageService } from "src/app/services/home-page.service";
 import { AuthService } from "src/app/services/auth.service";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
@@ -8,6 +8,7 @@ import { PostService } from "src/app/services/post.service";
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ActionSheetController } from '@ionic/angular';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: "app-post-detail",
@@ -15,16 +16,16 @@ import { ActionSheetController } from '@ionic/angular';
   styleUrls: ["./post-detail.page.scss"],
 })
 export class PostDetailPage implements OnInit {
+  private backUrl = '/1/post';
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private outhService: AuthService,
+    private router: Router,
     private homePageService: HomePageService,
     private postService: PostService,
     private afAuth: AngularFireAuth,
-    private actionSheetCtrl: ActionSheetController
-  ) {
-    console.log("postID" + this.id);
+    private actionSheetCtrl: ActionSheetController  ) {
+    console.log('postID' + this.id);
   }
   comments: Observable<any[]>;
   heartType: string ;
@@ -36,6 +37,7 @@ export class PostDetailPage implements OnInit {
   addPostComment: FormGroup;
   @ViewChild("myInput", { static: true }) myInput: ElementRef;
   async ngOnInit() {
+    this.backUrl =  history.state.navSettings ?  history.state.navSettings.backUrl : this.backUrl;
     this.addPostComment = this.fb.group({
       comment: ["", Validators.required],
     });
@@ -119,5 +121,9 @@ export class PostDetailPage implements OnInit {
       ],
     });
     await actionSheet.present();
+  }
+
+  navigateBack() {
+    this.router.navigateByUrl(this.backUrl);
   }
 }

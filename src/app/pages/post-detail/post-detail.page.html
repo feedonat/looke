@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons color="orange" slot="start">
-      <ion-back-button color="light" defaultHref="1/post/list"></ion-back-button>
+      <ion-back-button color="light" defaultHref="{{backUrl}}"></ion-back-button>
     </ion-buttons>
     <ion-title class="main-header5">{{post.poster?.name}}'s Post</ion-title>
     <!-- A favorite button will not show if user not login. -->
@@ -34,7 +34,7 @@
     <ion-col class="card-footer1">
       <ion-button fill="clear" size="small" color="primary">
         <ion-icon slot="start" name="ios-chatboxes" color="primary"></ion-icon>
-        {{(post?.commentCount)}} 
+        {{(post?.count)}} 
       </ion-button>
       <ion-button  (click)="toggleHeart()" fill="clear" size="small" color="#FFD700">
         <ion-icon slot="start" [name]="heartType" color="primary"></ion-icon>

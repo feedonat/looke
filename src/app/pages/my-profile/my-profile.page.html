@@ -102,6 +102,14 @@
               <ion-icon name="arrow-forward" slot="end"></ion-icon>
             </ion-item>
 
+            <ion-item (click)="addGroup()">
+              <ion-icon name="lock" slot="start" color="primary"></ion-icon>
+              <ion-label>
+                <p class="link bold link text-slarge">Add Group</p>
+              </ion-label>
+              <ion-icon name="arrow-forward" slot="end"></ion-icon>
+            </ion-item>
+
             <ion-item [(ngModel)]="user" (click)="onPresentEditModal(user)"[ngModelOptions]="{standalone: true}" ngDefaultControl>
               <ion-icon name="create" slot="start" color="primary"></ion-icon>
               <ion-label>

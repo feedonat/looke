@@ -59,8 +59,8 @@ export class HomePageService {
       console.log('ref: ', ref);
       documentId = ref.id;
       storageRef = this.storage.ref(`post-category/${documentId}`);
-      const uploadTask = storageRef.putString(imageData, 'base64', { contentType: 'image/png'});
-      return uploadTask;      
+      const uploadTask = storageRef.putString(imageData, 'base64', { contentType: 'image/gif'});
+      return uploadTask;
 
     }).then(task => {
       console.log('task: ', task);

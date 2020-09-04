@@ -1,0 +1,112 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="first" [class.show-background]="showToolbar">
+    <ion-buttons color="orange" slot="start">
+      <ion-back-button color="light" defaultHref="1/community"></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="showTitle" class="main-header5" [class.show-title]="showTitle">{{user?.name}}</ion-title>
+    <!-- A favorite button will not show if user not login. -->
+    <ion-buttons slot="end">
+      <ion-button color="light" (click)="toggleHeart()">
+        <ion-icon slot="icon-only" [name]="heartType"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button color="light" (click)="toggleHeart()">
+        <ion-icon slot="icon-only" name="more"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content no-padding fullscreen (ionScroll)="onScroll($event)" [scrollEvents]="true" [class.transition]="transition">
+  <!--*********** Image header  ***********-->
+  <!-- <div class="detail-header" [ngStyle]="{'background-image': 'url(' + itemArray.image + ')'}">
+</div> -->
+<div class="container">
+  <img [src]="user?.img ? user.img : './assets/img/avatar.png'" alt="{{user?.name}}">
+  <ion-row >
+    <ion-col size="9"> <div class="bottom-left">
+      <h2>{{user?.name}}</h2>
+      <p>  <ion-icon name="pin" color="primary"></ion-icon>Dallas </p>
+     </div></ion-col>
+    <ion-col size="3">
+      <div class="bottom-right">
+        <ion-fab-button (click)="addPost()">
+          <ion-icon name="person-add"></ion-icon>
+        </ion-fab-button>
+         </div>
+    </ion-col>
+   </ion-row>
+   </div>
+   <div class="home-content">
+    <!--*********** Category  ***********-->
+    <ion-item lines="none">
+      <p class="main-b-header6">groups</p>
+    </ion-item>
+    <ion-slides [options]="slideOptsOne">
+      <ion-slide class="group-ion-slide" *ngFor="let g of groups |async">
+         <ion-card class="group-ion-card" tappable 
+         (click)="groupDetail(g?.id)">
+          <img [src]="g?.coverImg ? g.coverImg : './assets/img/image-outline.svg'" alt="" />
+          <ion-card-header>
+            <ion-card-subtitle>{{g?.groupName}}</ion-card-subtitle>       
+          </ion-card-header>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  
+ <!-- recent user posts  -->
+
+   <ion-item lines="none" class="recent-activity">
+    <p>Recent Activites </p>
+  </ion-item>
+ <ion-card mode="ios" *ngFor="let post of posts  | async " tappable>
+   <ion-item lines="none">
+     <ion-avatar slot="start">
+       <img [src]="post.postUser.img">
+     </ion-avatar>
+     <ion-buttons slot="end">
+       <ion-button (click)="toggleActionSeet()">
+         <ion-icon slot="icon-only" color="medium" name="more"></ion-icon>
+        </ion-button>
+     </ion-buttons>
+     <ion-label class="post-header" [routerLink]="[post.id]">
+       <h3>{{post.postUser.name}}</h3>
+       <p>{{post.created.seconds *1000 | amTimeAgo}}</p>
+     </ion-label>
+
+   </ion-item>
+   <ion-item *ngIf="post.img">
+     <ion-slides pager="true">
+       <ion-slide>
+         <img class="image-slide" [src]="post.img">
+       </ion-slide>
+     </ion-slides>
+   </ion-item>
+   <ion-card-content (click)="postDetail(post.id)">
+     <ion-card-title >
+       <h2 class="main_header4"> {{post.title}}</h2>
+     </ion-card-title>
+     <p [innerHTML]="post.description"></p>
+   </ion-card-content>
+   <ion-row>
+     <ion-col>
+       <ion-button fill="clear" size="small" color="#FFD700" [routerLink]="[post.id]">
+         <ion-icon  slot="start" name="ios-chatboxes" color="gray"></ion-icon>
+         {{post?.commentCount}}
+       </ion-button>
+       <ion-button fill="clear" size="small" color="#FFD700" (click)="lovePost(post.id)">
+         <ion-icon slot="start" name="ios-heart" color="gray"></ion-icon>
+         {{post?.likes?.length}}
+       </ion-button>
+     </ion-col>
+     <ion-col center class="ion-text-right">
+       <ion-button fill="clear" size="small" color="dark" [routerLink]="[post.id]">
+         REPLY
+       </ion-button>
+     </ion-col>
+   </ion-row>
+ </ion-card>
+</div>
+
+</ion-content>

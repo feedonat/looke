@@ -29,22 +29,34 @@ const routes: Routes = [
       {
         path: 'login',
         loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
-      }
+      },
 
     ]
   },
   
   {
     path: 'community',
-    loadChildren: () => import('./pages/community/community.module').then( m => m.CommunityPageModule)
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./pages/community/community.module').then( m => m.CommunityPageModule)
+      },
+      {
+        path: ':id',
+        loadChildren: () => import('./pages/user-detail/user-detail.module').then( m => m.UserDetailPageModule)
+      },
+      {
+        path: '',
+        redirectTo: '',
+        pathMatch: 'full'
+      }
+    ]
   },
 
   {
     path: 'post',
     children: [
       {
-
-        
         path: '',
         loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
 
@@ -75,6 +87,30 @@ const routes: Routes = [
     ]
   },
 
+{
+  path: 'group',
+  children: [
+    {
+
+      path: '',
+      loadChildren: () => import('./pages/group/group.module').then( m => m.GroupPageModule)
+
+    },
+    {
+      path: 'add',
+      loadChildren: () => import('./pages/group/group.module').then( m => m.GroupPageModule)
+    },
+    {
+      path: ':id',
+      loadChildren: () => import('./pages/group-detail/group-detail.module').then( m => m.GroupDetailPageModule)
+    },
+    {
+      path: '',
+      redirectTo: 'add',
+      pathMatch: 'full'
+    }
+  ]
+},
 
    {
     path: 'place',
@@ -152,7 +188,11 @@ const routes: Routes = [
       {
         path: 'add-post',
         loadChildren: () => import('./pages/add-post/add-post.module').then( m => m.AddPostPageModule)
-      }
+      },
+      {
+        path: 'add-group',
+        loadChildren: () => import('./pages/group/group.module').then( m => m.GroupPageModule)
+      },
 
     ]
   },
@@ -187,8 +227,10 @@ const routes: Routes = [
     path: 'onboarding',
     loadChildren: () => import('./pages/onboarding/onboarding.module').then( m => m.OnboardingPageModule)
   },
-  
-
+  {
+    path: 'user-detail',
+    loadChildren: () => import('./pages/user-detail/user-detail.module').then( m => m.UserDetailPageModule)
+  }
 
  ];
 

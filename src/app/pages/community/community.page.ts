@@ -1,6 +1,7 @@
 import { HomePageService } from 'src/app/services/home-page.service';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-community',
@@ -9,11 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CommunityPage implements OnInit {
 
-  banners: Observable<any[]>;
+  users: Observable<any[]>;
 
-  constructor( private homePageService : HomePageService) { }
+  constructor( private homePageService : HomePageService,
+               private commonService : CommonService) { }
   ngOnInit() {
-    this.banners = this.homePageService.getBanners();
+    this.users = this.commonService.getUserList();
   }
 
 }

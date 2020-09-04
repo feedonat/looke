@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-back-button color="light"  defaultHref="1/profile"></ion-back-button>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Create Group</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+  <ion-card-header>
+  </ion-card-header>
+  <ion-card-content>
+    <form [formGroup]="addGroupForm" (ngSubmit)="createGroup()">
+    <div class="box" (click)="selectImage()"
+      [style.border-color]= "'primary'"
+      [style.background-image] ="productImageBase64 ? 'url(' + productImageBase64 + ')' : './assets/img/image-outline.svg'">
+      <div class="center">
+        <ion-spinner *ngIf="isUploading"></ion-spinner>
+        <ion-icon name="camera" color="bold" *ngIf="!isUploading && !productImageBase64"></ion-icon>
+      </div>
+      <div class="bottom" *ngIf="!isUploading && !productImageBase64">
+        <div>Add a cover image</div>
+      </div>
+    </div>
+
+     <ion-item border-color="primary">
+        <ion-label position="stacked"> What is your Group About</ion-label>
+        <ion-select placeholder="select category" formControlName="groupCategory">
+          <ion-select-option *ngFor="let category of categories | async">
+            {{ category.name }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label position="stacked">Group Name</ion-label>
+        <ion-input [autofocus]="true" type="name" placeholder="post title.." formControlName="groupName"></ion-input>
+      </ion-item> 
+      <ion-item lines="none">
+        <ion-label position="stacked">Description</ion-label>
+        <ion-textarea placeholder="Enter more information here..." formControlName="desc"></ion-textarea>
+      </ion-item>  
+      <ion-button type="submit" class="ion-padding-horizontal ion-margin-vertical"
+      [disabled]="!addGroupForm.valid">
+        create Group
+      </ion-button>
+    </form>
+  </ion-card-content>
+</ion-card>
+</ion-content>
+

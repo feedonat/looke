@@ -54,6 +54,7 @@ export class AuthService {
         name: credentials.name,
         email: credentials.email,
         role: credentials.role,
+        groups: [],
         created: firebase.firestore.FieldValue.serverTimestamp()
       });
     });
@@ -112,4 +113,18 @@ getCurrentUser() {
     return this.user;
   }
 
+  facebookLogIn(){
+    this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).then(res => {
+      console.log(res);
+      console.log('after register: ', res);
+      return this.db.doc(`users/${res.user.uid}`).set({
+        name: res.user.displayName,
+        email: res.user.email,
+        role: 'user',
+        groups: [],
+        img: res.user.photoURL,
+        created: firebase.firestore.FieldValue.serverTimestamp()
+      });
+    });
+  }
 }

@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { ModalController, LoadingController, NavController } from '@ionic/angular';
 import { NavigationExtras, Router } from '@angular/router';
-
 @Component({
   selector: 'app-my-profile',
   templateUrl: './my-profile.page.html',
@@ -60,6 +59,9 @@ export class MyProfilePage implements OnInit {
 
    async addPost() {
     this.navCntr.navigateRoot("1/profile/add-post")
+   }
+   async addGroup() {
+    this.navCntr.navigateRoot("1/profile/add-group")
    }
 
    async banner() {

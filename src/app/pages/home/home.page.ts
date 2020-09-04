@@ -21,6 +21,7 @@ import { HomePageService } from "src/app/services/home-page.service";
 import { PostService } from "src/app/services/post.service";
 import { PostDetailPage } from "../post-detail/post-detail.page";
 import { ThemeService } from 'src/app/services/theme.service';
+import { GroupService } from 'src/app/services/group.service';
 
 @Component({
   selector: "app-home",
@@ -36,9 +37,9 @@ export class HomePage implements OnInit {
   //Slider configuration
   slideOptsOne = {
     zoom: false,
-    slidesPerView: 2.5,
+    slidesPerView: 1.8,
     spaceBetween: -20,
-    centeredSlides: false,
+    centeredSlides: true,
   };
   
   sliderConfig = {
@@ -67,9 +68,11 @@ export class HomePage implements OnInit {
     public router: Router,
     private renderer: Renderer2,
     private actionSheetCtrl: ActionSheetController,
-    private themeSwitcher: ThemeService
+    private themeSwitcher: ThemeService,
+    private groupService : GroupService
   ) { }
   ngOnInit() {
+    this.groups = this.groupService.getGroups();
     this.categories = this.homePageService.getCategories();
     this.banners = this.homePageService.getBanners();
     this.posts = this.postService.getPosts(this.pageSize);
@@ -127,7 +130,9 @@ export class HomePage implements OnInit {
     });
     await actionSheet.present();
   }
-
+  openDetail(id){
+    this.navController.navigateRoot('1/group/'+ id);
+  }
 
 
 

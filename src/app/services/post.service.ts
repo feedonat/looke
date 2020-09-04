@@ -8,6 +8,7 @@ import {
 } from "@angular/fire/storage";
 import * as firebase from "firebase/app";
 import { Observable, from, combineLatest } from "rxjs";
+import { CommonService } from './common.service';
 @Injectable({
   providedIn: "root",
 })
@@ -18,7 +19,8 @@ export class PostService {
   constructor(
     private firestore: AngularFirestore,
     private fireAuth: AngularFireAuth,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private commonService : CommonService
   ) {
     this.fireAuth.authState.subscribe((user) => {
       if (user) {
@@ -33,25 +35,24 @@ export class PostService {
     });
   }
   addPost(post, poster) {
-    //return this.db.collection('places').add(place)
     console.log(post);
     post.creator = this.fireAuth.auth.currentUser.uid;
     post.poster = poster;
     post.created = firebase.firestore.FieldValue.serverTimestamp();
-    post.commentCount = 0;
+    post.count = 0;
     post.likes = [];
     const imageData = post.img;
     delete post.image;
-   // console.log('post detail ' + JSON.stringify(post));
     let documentId = null;
     let storageRef: AngularFireStorageReference = null;
 
     return this.firestore
-      .collection("post")
+      .collection('post')
       .add(post)
       .then((ref) => {
         console.log("ref: ", ref);
         documentId = ref.id;
+        this.commonService.increamentCounter('post', documentId);
         storageRef = this.storage.ref(`post/${documentId}`);
         const uploadTask = storageRef.putString(imageData, "base64", {
           contentType: "image/png",
@@ -97,7 +98,7 @@ export class PostService {
   getPosts(pageSize) {
     console.log("start getPosts");
     return this.firestore
-      .collection<any>("post", (ref) => ref.orderBy("created", "desc").limit(pageSize))
+      .collection<any>("post", (ref) => ref.orderBy("created", "desc"))
       .snapshotChanges()
       .pipe(
         map((actions) => {
@@ -123,6 +124,7 @@ export class PostService {
   }
 
   addComment(id, comment) {
+    let documentId = null;
     //return this.db.collection('places').add(place)
     console.log(comment);
     comment.creator = this.fireAuth.auth.currentUser.uid;
@@ -131,7 +133,9 @@ export class PostService {
     comment.thread = [];
     comment.likes = [];
     //console.log("post detail " + JSON.stringify(comment));
-    return this.firestore.collection("post-comment").add(comment);
+    return this.firestore.collection("post-comment").add(comment).then(ref => {
+      this.commonService.increamentCounter('post', id);
+    });
   }
   addThread(id, thread) {
     //return this.db.collection('places').add(place)
@@ -159,8 +163,6 @@ export class PostService {
         likes: firebase.firestore.FieldValue.arrayUnion(this.userId),
       });
   }
-
-  
 
   getPostComments(postId) {
     console.log("start getComments");

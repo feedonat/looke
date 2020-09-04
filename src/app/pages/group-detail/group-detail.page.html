@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+    <ion-back-button defaultHref="{{backUrl}}"></ion-back-button>
+    </ion-buttons>
+    <ion-title>groupDetail</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-card>
+    <img [src]="group?.coverImg ? group.coverImg : './assets/img/image-outline.svg'" alt="">
+    <ion-card-header>
+      <ion-card-subtitle>{{group?.groupName}}</ion-card-subtitle>
+      <ion-card-subtitle color="primary">{{group?.groupCategory}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item lines="none">
+      <p [innerHTML]="group?.desc"></p>
+      </ion-item >
+      <ion-slides [options]="slideOptsOne">
+        <ion-slide class="ion-slide-header" *ngFor="let m of members">
+          <ion-avatar slot="start">
+              <img [src]="m.img" />
+            </ion-avatar>
+        </ion-slide>
+        <h3 *ngIf="memberCount>0">+ {{memberCount}} </h3>
+      </ion-slides>
+    </ion-card-content>
+    <ion-button *ngIf="!isMember" expand="block" type="button" color="primary" shape="round"
+      class="ion-padding-horizontal ion-margin-vertical" (click)="joinGroup()">
+      Join Group
+    </ion-button>
+    <ion-button *ngIf="isMember" expand="block" type="button" color="primary" shape="round"
+      class="ion-padding-horizontal ion-margin-vertical" (click)="joinGroup()">
+      Post
+    </ion-button>
+
+  </ion-card>
+
+</ion-content>
