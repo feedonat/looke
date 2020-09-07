@@ -9,6 +9,7 @@ import {
 import * as firebase from "firebase/app";
 import { Observable, from, combineLatest } from "rxjs";
 import { CommonService } from './common.service';
+import { Console } from 'console';
 @Injectable({
   providedIn: "root",
 })
@@ -94,6 +95,34 @@ export class PostService {
         likes: firebase.firestore.FieldValue.arrayUnion(this.userId),
       });
   }
+  getGroups() {
+    console.log('start getGroups');
+    return this.firestore
+      .collection<any>('group-member', (ref) => ref.orderBy("created", "desc"))
+      .snapshotChanges()
+      .pipe(
+        map((actions) => {
+          return actions.map((a) => {
+            const data = a.payload.doc.data();
+            const id = a.payload.doc.id;
+            const groupId = data.groupId;
+            console.log("#### group ID =" + JSON.stringify(groupId));
+            console.log("#### group-member =" + JSON.stringify(data));
+            return this.firestore
+              .doc("groups/"+groupId)
+              .valueChanges()
+              .pipe(
+                map((g) => {
+                  console.log("Member List 12344556666 " + JSON.stringify(g));
+                  return Object.assign({ id, group: g, ...data });
+                })
+              );
+          });
+        }),
+        flatMap((posts) => combineLatest(posts))
+      );
+  }
+
 
   getPosts(pageSize) {
     console.log("start getPosts");
@@ -108,13 +137,13 @@ export class PostService {
             const poster = data.creator;
 
             //console.log("Poster --- > "+poster);
-            //console.log("#### posts List ="+ JSON.stringify( data));
+            console.log("#### posts List ="+ JSON.stringify( data));
             return this.firestore
               .doc("users/" + poster)
               .valueChanges()
               .pipe(
                 map((user) => {
-                 return Object.assign({id, postUser: user, ...data });
+                 return Object.assign({id, poster , postUser: user, ...data });
                 })
               );
           });
@@ -184,7 +213,7 @@ export class PostService {
               .valueChanges()
               .pipe(
                 map((user) => {
-                  return Object.assign({ id, postUser: user, ...data });
+                  return Object.assign({ id, poster, postUser: user, ...data });
                 })
               );
           });

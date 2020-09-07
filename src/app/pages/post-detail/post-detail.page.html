@@ -27,19 +27,19 @@
       </ion-item>
     </ion-card-subtitle>
     <ion-card-content>
-    <p [innerHTML]="post?.description"></p>
+      <p [innerHTML]="post?.description"></p>
     </ion-card-content>
   </ion-card>
   <ion-row color="light">
     <ion-col class="card-footer1">
       <ion-button fill="clear" size="small" color="primary">
         <ion-icon slot="start" name="ios-chatboxes" color="primary"></ion-icon>
-        {{(post?.count)}} 
+        {{(post?.count)}}
       </ion-button>
-      <ion-button  (click)="toggleHeart()" fill="clear" size="small" color="#FFD700">
+      <ion-button (click)="toggleHeart()" fill="clear" size="small" color="#FFD700">
         <ion-icon slot="start" [name]="heartType" color="primary"></ion-icon>
-       {{post?.likes?.length}}
-       </ion-button>
+        {{post?.likes?.length}}
+      </ion-button>
     </ion-col>
     <ion-col center class="ion-text-right card-footer2">
       <ion-button fill="clear" size="small" color="dark">
@@ -49,40 +49,41 @@
     <br>
   </ion-row>
   <ion-list *ngIf="(comments| async)?.length>0 ;else noComment" class="ion-no-margin">
-    <h5  class=" ion-no-margin comment-header">
+    <h5 class=" ion-no-margin comment-header">
       <ion-icon class="text-medium" name="chatbubbles"></ion-icon>
       Comments
     </h5>
     <div>
       <ion-item class="comment-list" *ngFor="let c of comments | async ">
-        <ion-avatar slot="start">
-          <img [src]="c.postUser?.img" />
-        </ion-avatar>
-        <ion-label class="ion-text-wrap">
-          <ion-text color="medium"  class="ion-float-end">
-            <span class="text-small">
-              {{c.created?.seconds *1000 | amTimeAgo}}
-            </span>
-          </ion-text>
-           <h4>{{c?.postUser?.name}}</h4> 
-          <ion-text color="dark">
-            <div class="message">{{c?.comment}}</div>
-          </ion-text>
-          <p>
-          <ion-button (click)=" toggleCommentLike(c.id)" fill="clear" size="small" color="primary">
-            <ion-icon slot="start" name="thumbs-up" color="primary"></ion-icon>
-            {{(c?.likes.length)}}
-          </ion-button>
-          <ion-button fill="clear" size="small" color="dark">
-            <ion-icon slot="start" name="flag" color="primary"></ion-icon>
-          </ion-button>
-        </p>
-        </ion-label>
+
+        <ion-row>
+          <img (click)="userDetail(c.poster)" [src]="c.postUser?.img" />
+          <ion-label class="ion-text-wrap" (click)="userDetail(c.poster)">
+            <h4>{{c?.postUser?.name}}</h4>
+            <h5>{{c.created?.seconds *1000 | amTimeAgo}}</h5>
+          </ion-label>
+          <ion-col size="12">
+            <ion-label class="ion-text-wrap">
+              <div class="message">
+                {{c?.comment}}
+              </div>
+              <p>
+                <ion-button float-left (click)=" toggleCommentLike(c.id)" fill="clear" size="small" color="primary">
+                  <ion-icon slot="start" name="thumbs-up" color="primary"></ion-icon>
+                  {{(c?.likes.length)}}
+                </ion-button>
+                <ion-button float-left fill="clear" size="small" color="dark">
+                  <ion-icon slot="start" name="flag" color="primary"></ion-icon>
+                </ion-button>
+              </p>
+            </ion-label>
+          </ion-col>
+        </ion-row>
       </ion-item>
     </div>
   </ion-list>
   <ng-template #noComment>
-   <p class="no-comment">No Comment yet - be the first to give a comment !</p> 
+    <p class="no-comment">No Comment yet - be the first to give a comment !</p>
   </ng-template>
 </ion-content>
 <ion-footer class="ion-no-border">

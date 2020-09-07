@@ -126,4 +126,10 @@ export class PostDetailPage implements OnInit {
   navigateBack() {
     this.router.navigateByUrl(this.backUrl);
   }
+
+  userDetail(id) {
+    this.router.navigate(
+      [`1/community/${id}`],
+      { state: { navSettings: { backUrl: '1/post/'+this.id } } });
+  }
 }

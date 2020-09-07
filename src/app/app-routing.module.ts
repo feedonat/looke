@@ -97,6 +97,10 @@ const routes: Routes = [
 
     },
     {
+      path: 'list',
+      loadChildren: () => import('./pages/group-list/group-list.module').then( m => m.GroupListPageModule)
+    },
+    {
       path: 'add',
       loadChildren: () => import('./pages/group/group.module').then( m => m.GroupPageModule)
     },

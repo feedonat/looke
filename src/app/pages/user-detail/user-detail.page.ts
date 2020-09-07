@@ -5,6 +5,7 @@ import { environment } from "../../../environments/environment";
 import { UserServiceService } from "src/app/services/user-service.service";
 import { Observable } from "rxjs";
 import { AuthService } from "src/app/services/auth.service";
+import { AngularFireAuth } from '@angular/fire/auth';
 @Component({
   selector: "app-user-detail",
   templateUrl: "./user-detail.page.html",
@@ -12,13 +13,14 @@ import { AuthService } from "src/app/services/auth.service";
 })
 export class UserDetailPage implements OnInit {
   id = null;
+  backUrl = "1/community";
   showToolbar = false;
   showTitle = false;
   transition: boolean = false;
   heartType = null;
   currentUser = null;
   user = null;
-  groups: Observable<any[]>;
+  groups: any[];
   posts: Observable<any[]>;
   slideOptsOne = {
     zoom: false,
@@ -30,7 +32,7 @@ export class UserDetailPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private userService: UserServiceService,
-    private authService: AuthService,
+    private afAuth: AngularFireAuth,
     private router: Router,
     private actionSheetCtrl: ActionSheetController
   ) {
@@ -39,20 +41,28 @@ export class UserDetailPage implements OnInit {
   }
 
   ngOnInit() {
-    this.groups = null;
+    this.backUrl = history.state.navSettings
+    ? history.state.navSettings.backUrl
+    : this.backUrl;
     this.getUserDetail();
-    this.getUserGroups();
+    //this.getUserGroups();
+
+    this.userService.getGroups(this.id).subscribe(data=>{
+      console.log ('GROUP LIST ---------- '+JSON.stringify(data));
+      this.groups = data;
+    });
+
     this.posts = this.userService.getPosts(this.id)
     this.showTitle = false;
   }
 
-  getUserGroups(){
-    this.authService.getCurrentUser().subscribe(x=>{
-      this.currentUser = x;
-      console.log('User Detail---groups  = '+JSON.stringify(this.user.groups) );
-      this.groups =  this.userService.getGroupMembersList(this.user.groups);
-    });
-  }
+  // getUserGroups(){
+  //   this.authService.getCurrentUser().subscribe(x=>{
+  //     this.currentUser = x;
+  //     console.log('User Detail---groups  = '+JSON.stringify(this.user.groups) );
+  //     this.groups =  this.userService.getGroupMembersList(this.user.groups);
+  //   });
+  // }
 
   onScroll($event: CustomEvent) {
     if ($event && $event.detail && $event.detail.scrollTop) {
@@ -98,7 +108,7 @@ export class UserDetailPage implements OnInit {
 
   groupDetail(id) {
     this.router.navigate(
-      [`1/group//${id}`],
+      [`1/group/${id}`],
       { state: { navSettings: { backUrl: '1/community/' + this.id } } });
   }
   async toggleActionSeet() {
@@ -146,7 +156,10 @@ export class UserDetailPage implements OnInit {
 
   postDetail(id) {
     this.router.navigate(
-      [`1/post//${id}`],
+      [`1/post/${id}`],
       { state: { navSettings: { backUrl: '1/community/' + this.id } } });
+  }
+  navigateBack() {
+    this.router.navigateByUrl(this.backUrl);
   }
 }

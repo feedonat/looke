@@ -21,7 +21,7 @@
       <ion-slides [options]="slideOptsOne">
         <ion-slide class="ion-slide-header" *ngFor="let m of members">
           <ion-avatar slot="start">
-              <img [src]="m.img" />
+              <img [src]="m.user.img" />
             </ion-avatar>
         </ion-slide>
         <h3 *ngIf="memberCount>0">+ {{memberCount}} </h3>

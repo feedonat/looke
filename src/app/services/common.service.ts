@@ -21,6 +21,13 @@ export class CommonService {
     chainCounterRef.update({ groups: firebase.firestore.FieldValue.arrayUnion(data) });
   }
 
+  addToMemberArray(coll,doc,data) {
+ 
+    console.log("ADDDDD MEMBER ++++++++++++ " +data)
+    let chainCounterRef = this.db.collection(coll).doc(doc);
+    chainCounterRef.update({ memberArr: firebase.firestore.FieldValue.arrayUnion(data) });
+  }
+
   getUserList() {
     return this.db.collection('users').snapshotChanges().pipe(
       map(actions => actions.map(a => {

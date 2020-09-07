@@ -44,6 +44,11 @@
         <ion-label position="stacked">Description</ion-label>
         <ion-textarea placeholder="Enter more information here..." formControlName="desc"></ion-textarea>
       </ion-item>  
+
+      <ion-item>
+        <ion-label position="stacked">Closed Group</ion-label>
+        <ion-toggle slot="start" name="isPuplic" color="primary"  [(ngModel)]="isToggled" (ionChange)="notify()" unchecked formControlName="isPuplic"></ion-toggle>
+      </ion-item>
       <ion-button type="submit" class="ion-padding-horizontal ion-margin-vertical"
       [disabled]="!addGroupForm.valid">
         create Group

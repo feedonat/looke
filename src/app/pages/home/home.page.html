@@ -3,7 +3,7 @@
     <ion-title >
       <img class="title-image" src="../../../assets/imgs/logoLookE.png" width="150" height="30" />
     </ion-title>
-    <ion-buttons slot="end" (click)="ThemeSwitcher()">
+    <ion-buttons slot="end" (click)="presentFilter()">
       <ion-button>
         <ion-icon name="notifications" color="light"></ion-icon>
        </ion-button>
@@ -73,18 +73,24 @@
         <p class="main-b-header6">Category</p>
       </ion-item>
       <div class="top-horizontal-scroll  slide-left">
-        <ion-card tappable class="shop-main-h-card shop-card-s-wide " *ngFor="let category of groups | async"
-          (click)="openDetail(category.id)">
-          <div class="card-s-wide-bg ion-text-uppercase" [ngStyle]="{'background-image': 'url(' + category.coverImg+ ')'}">
-            <h2 class="card-s-wide-title"> {{category.groupName}}</h2>
+        <ion-card tappable class="shop-main-h-card shop-card-s-wide " *ngFor="let category of groups"
+          (click)="openDetail(category.groupId)">
+          <div class="card-s-wide-bg ion-text-uppercase" [ngStyle]="{'background-image': 'url(' + category.group?.coverImg+ ')'}">
+            <h2 class="card-s-wide-title"> {{category.group?.groupName}}</h2>
           </div>
         </ion-card>
+        <ion-card tappable class="shop-main-h-card shop-card-s-wide" 
+        (click)="openGroupList()">
+        <div class="card-s-wide-bg ion-text-uppercase">
+          <h2 class="card-s-wide-title"> View All</h2>
+        </div>
+      </ion-card>
       </div>
 
    
     <ion-card mode="ios" *ngFor="let post of posts  | async " tappable>
       <ion-item lines="none">
-        <ion-avatar slot="start">
+        <ion-avatar slot="start" (click)="userDetail(post?.creator)">
           <img [src]="post.postUser.img">
         </ion-avatar>
         <ion-buttons slot="end">
@@ -92,7 +98,7 @@
             <ion-icon slot="icon-only" color="medium" name="more"></ion-icon>
            </ion-button>
         </ion-buttons>
-        <ion-label class="post-header" [routerLink]="[post.id]">
+        <ion-label class="post-header" (click)="userDetail(post?.creator)">
           <h3>{{post.postUser.name}}</h3>
           <p>{{post.created.seconds *1000 | amTimeAgo}}</p>
         </ion-label>

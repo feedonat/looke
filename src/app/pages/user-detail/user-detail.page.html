@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
   <ion-toolbar class="first" [class.show-background]="showToolbar">
     <ion-buttons color="orange" slot="start">
-      <ion-back-button color="light" defaultHref="1/community"></ion-back-button>
+      <ion-back-button color="light" defaultHref="{{backUrl}}"></ion-back-button>
     </ion-buttons>
     <ion-title *ngIf="showTitle" class="main-header5" [class.show-title]="showTitle">{{user?.name}}</ion-title>
     <!-- A favorite button will not show if user not login. -->
@@ -41,15 +41,15 @@
    <div class="home-content">
     <!--*********** Category  ***********-->
     <ion-item lines="none">
-      <p class="main-b-header6">groups</p>
+      <p class="header-text">My Groups</p>
     </ion-item>
     <ion-slides [options]="slideOptsOne">
-      <ion-slide class="group-ion-slide" *ngFor="let g of groups |async">
+      <ion-slide class="group-ion-slide" *ngFor="let g of groups">
          <ion-card class="group-ion-card" tappable 
-         (click)="groupDetail(g?.id)">
-          <img [src]="g?.coverImg ? g.coverImg : './assets/img/image-outline.svg'" alt="" />
+         (click)="groupDetail(g?.groupId)">
+          <img [src]="g.group?.coverImg ? g.group.coverImg : './assets/img/image-outline.svg'" alt="" />
           <ion-card-header>
-            <ion-card-subtitle>{{g?.groupName}}</ion-card-subtitle>       
+            <ion-card-subtitle>{{g.group?.groupName}}</ion-card-subtitle>       
           </ion-card-header>
         </ion-card>
       </ion-slide>
@@ -57,7 +57,7 @@
   
  <!-- recent user posts  -->
 
-   <ion-item lines="none" class="recent-activity">
+   <ion-item lines="none" class="recent-activity header-text">
     <p>Recent Activites </p>
   </ion-item>
  <ion-card mode="ios" *ngFor="let post of posts  | async " tappable>

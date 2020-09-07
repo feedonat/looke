@@ -38,7 +38,7 @@ ion-card.main-card{
     margin-left: 20px;
 }
 .comment-list{
-    margin: 5px;
+  margin: 20px;
 }
 ion-input {
   background: #ececea;
@@ -64,11 +64,11 @@ ion-input {
 }
 p{
     padding: 5px;
+    font-weight:600 ;
+    font-style: normal;
 }
 h4{
   font-weight: 700!important;
-  padding: 10px;
-  margin-top: -10px;
 }
 .footer{
   display: flex;
@@ -76,13 +76,24 @@ h4{
 }
 
 .message {
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 10px;
   display: inline-block;
   background-color: #e8e7e2;
+  margin-left: 10px;
+  font-size: medium;
 }
 
 .no-comment{
     padding: 25px;
     margin-top: 10px;
+}
+img{
+  width: 30px;
+  height: 32px;
+  border-radius: 10px;
+ margin-right: 10px;
+}
+.col9{
+  //margin-left: -40px;
 }

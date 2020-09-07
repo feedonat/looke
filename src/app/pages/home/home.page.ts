@@ -13,6 +13,7 @@ import {
   Platform,
   NavController,
   ActionSheetController,
+  IonRouterOutlet,
 } from "@ionic/angular";
 import { ActivatedRoute, Router } from "@angular/router";
 import { HideHeaderConfig } from "src/app/shared/hide-header.directive";
@@ -22,6 +23,7 @@ import { PostService } from "src/app/services/post.service";
 import { PostDetailPage } from "../post-detail/post-detail.page";
 import { ThemeService } from 'src/app/services/theme.service';
 import { GroupService } from 'src/app/services/group.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: "app-home",
@@ -52,7 +54,7 @@ export class HomePage implements OnInit {
   private observer: IntersectionObserver;
   //********* Observable *********/
   showed = false;
-  groups: Observable<any[]>;
+  groups: any[];
   categories: Observable<any[]>;
   promotions: Observable<any[]>;
   recommended: Observable<any[]>;
@@ -60,22 +62,28 @@ export class HomePage implements OnInit {
   posts: Observable<any[]>;
   isPaused = false;
   pageSize = 10;
+  excludeTracks: any = [];
   constructor(
     public homePageService: HomePageService,
     public postService: PostService,
     public menuCtrl: MenuController,
     private navController: NavController,
     public router: Router,
-    private renderer: Renderer2,
     private actionSheetCtrl: ActionSheetController,
     private themeSwitcher: ThemeService,
-    private groupService : GroupService
+    private groupService : GroupService,
+    private afAuth : AngularFireAuth,
+    public routerOutlet: IonRouterOutlet,
+
   ) { }
   ngOnInit() {
-    this.groups = this.groupService.getGroups();
-    this.categories = this.homePageService.getCategories();
-    this.banners = this.homePageService.getBanners();
-    this.posts = this.postService.getPosts(this.pageSize);
+     this.groupService.getGroups(this.afAuth.auth.currentUser.uid).subscribe(data=>{
+      console.log ('GROUP LIST ---------- '+JSON.stringify(data));
+      this.groups = data;
+    });
+     this.categories = this.homePageService.getCategories();
+     this.banners = this.homePageService.getBanners();
+     this.posts = this.postService.getPosts(this.pageSize);
   }
   toggleSideMenu() {
     this.menuCtrl.toggle(); //Add this method to your button click function
@@ -134,8 +142,14 @@ export class HomePage implements OnInit {
     this.navController.navigateRoot('1/group/'+ id);
   }
 
-
-
+  openGroupList(){
+    this.navController.navigateRoot('1/group/list');
+  }
+  userDetail(id) {
+    this.router.navigate(
+      [`1/community/${id}`],
+      { state: { navSettings: { backUrl: '1/post' } } });
+  }
 
   onLoadMore(event) {
     //console.log("merged posts ---- > "+JSON.stringify(nextData));

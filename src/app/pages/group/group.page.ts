@@ -13,6 +13,8 @@ import { GroupService } from 'src/app/services/group.service';
 export class GroupPage implements OnInit {
 
   mainUpload: any;
+  isToggled = false;
+  isPuplic = false;
   categories: Observable<any[]>;
   private poster: any;
   public isUploading = false;
@@ -33,6 +35,7 @@ export class GroupPage implements OnInit {
       groupName: ["", [Validators.required]],
       desc: ["", Validators.required],
       coverImg: "",
+      isPuplic: this.isPuplic
     });
     this.categories = this.groupService.getCategories();
     this.poster = this.outhService.getCurrentUser().subscribe((user) => {
@@ -117,4 +120,7 @@ export class GroupPage implements OnInit {
     await actionSheet.present();
   }
 
+  public notify() {
+   this.isPuplic = this.isToggled;
+  }
 }

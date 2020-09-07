@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>group-list</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <div class="home-content">
+      <!--*********** Category  ***********-->
+      <ion-item lines="none">
+        <p class="header-text">groups</p>
+      </ion-item>
+      <ion-slides [options]="slideOptsOne">
+        <ion-slide class="group-ion-slide" *ngFor="let g of groups">
+           <ion-card class="group-ion-card" tappable 
+           (click)="groupDetail(g.groupId)">
+            <img (click)="groupDetail(g.groupId)" [src]="g.group?.coverImg ? g.group.coverImg : './assets/img/image-outline.svg'" alt="" />
+            <ion-card-header>
+              <ion-card-subtitle>{{g.group?.groupName}}</ion-card-subtitle>       
+            </ion-card-header>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+
+      <ion-item lines="none">
+        <p class="header-text">Discover Groups & Communities</p>
+      </ion-item>
+    <ion-card mode="ios"
+    button
+    class="shadow ion-no-margin ion-margin-bottom" *ngFor="let u of allGroups | async " tappable >
+      <ion-card-content  (click)="groupDetail(u.id)">
+        <ion-row>
+          <ion-col size="4">
+            <img (click)="groupDetail(u.id)" [src]="u?.coverImg ? u.coverImg : './assets/img/avatar.png'" alt="" [routerLink]="[u.id]">
+          </ion-col>
+          <ion-col>
+            <ion-list lines="none">
+              <ion-item>
+                <h2>{{ u.groupName }}</h2>
+              </ion-item>
+              <ion-item>
+                <ion-button>
+                Join
+              </ion-button>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+    </div>
+</ion-content>

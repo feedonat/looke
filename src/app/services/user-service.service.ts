@@ -23,14 +23,44 @@ export class UserServiceService {
     return this.db.doc(`users/${id}`).valueChanges();
   }
 
-  getGroups(userid) {
-    console.log("start getGroups" + JSON.stringify(userid));
+  // getGroups(userid) {
+  //   console.log("start getGroups" + JSON.stringify(userid));
+  //   return this.db
+  //     .collection("groups", (q) =>
+  //       q.where("members", "array-contains-any", [userid])
+  //     )
+  //     .valueChanges();
+  // }
+
+  getGroups(user) {
+    console.log('start getGroups');
     return this.db
-      .collection("groups", (q) =>
-        q.where("members", "array-contains-any", [userid])
-      )
-      .valueChanges();
+      .collection<any>('group-member', (ref) => ref.where('userId','==',user)   .orderBy("created", "desc"))
+      .snapshotChanges()
+      .pipe(
+        map((actions) => {
+          return actions.map((a) => {
+            const data = a.payload.doc.data();
+            const id = a.payload.doc.id;
+            const groupId = data.groupId;
+            console.log("#### group ID =" + JSON.stringify(groupId));
+            console.log("#### group-member =" + JSON.stringify(data));
+            return this.db
+              .doc("groups/"+groupId)
+              .valueChanges()
+              .pipe(
+                map((g) => {
+                  console.log("Member List 12344556666 " + JSON.stringify(g));
+                  return Object.assign({ id, group: g, ...data });
+                })
+              );
+          });
+        }),
+        flatMap((posts) => combineLatest(posts))
+      );
   }
+
+
  getGroupMembersList(list) {
     const listArr = list.length > 0 ? list : ['89008908080'];
     console.log("start get members with paramater " + listArr);
@@ -39,7 +69,7 @@ export class UserServiceService {
                 ref.where(firebase.firestore.FieldPath.documentId(), 'in', list)
               ).snapshotChanges().pipe(map((action) => {
                  return action.map(a => {
-                  const data = a.payload.doc.data();
+                  const data = a.payload.doc.data;
                   const id = a.payload.doc.id;
                   return Object.assign({id, ...data});
                  });

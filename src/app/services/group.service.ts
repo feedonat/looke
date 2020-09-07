@@ -59,10 +59,12 @@ export class GroupService {
     //return this.db.collection('places').add(place)
     console.log(group);
     group.admin = groupCreator;
+    group.count = 0;
+    group.memberArr = [];
     group.created = firebase.firestore.FieldValue.serverTimestamp();
-    group.members = [];
     const imageData = group.coverImg;
     delete group.image;
+
     // console.log('post detail ' + JSON.stringify(post));
     let documentId = null;
     let storageRef: AngularFireStorageReference = null;
@@ -106,47 +108,61 @@ export class GroupService {
       });
   }
   // be a member - join the group
-  public joinGroup(user, groupID) {
-    this.firestore
-      .doc('groups/' + groupID)
-      .update({ members: firebase.firestore.FieldValue.arrayUnion(user) })
-      .then();
+  public joinGroup(user, group,isPublicGroup) {
+
+    console.log("user -member == "+user);
+    console.log('group '+group);
+    let member = {userId:null, groupId:null, created:null , approvedStatus: false };
+    member.userId = user;
+    member.groupId = group
+    member.created = firebase.firestore.FieldValue.serverTimestamp();
+    member.approvedStatus = isPublicGroup === true ?  isPublicGroup : false;
+  
+    console.log('final member object ' + member);
 
     return this.firestore
-      .doc('users/' + this.fireAuth.auth.currentUser.uid)
-      .update({ groups: firebase.firestore.FieldValue.arrayUnion(groupID) });
+      .collection('group-member').doc(`${group}-${user}`)
+      .set(member)
+      .then((ref) => {
+        // add user to member list
+        this.commonService.addToMemberArray('groups',member.groupId,member.userId);
+        console.log('message from fb'+ref);
+      });
   }
 
-  getGroups() {
+  getAllGroups() {
+    return this.firestore.collection('groups').snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data();
+        console.log("user list"+JSON.stringify(data));
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+  }
+
+
+
+  getGroups(user) {
     console.log('start getGroups');
     return this.firestore
-      .collection<any>('groups', (ref) => ref.orderBy("created", "desc"))
+      .collection<any>('group-member', (ref) => ref.where('userId','==' ,user).orderBy("created", "desc"))
       .snapshotChanges()
       .pipe(
         map((actions) => {
           return actions.map((a) => {
             const data = a.payload.doc.data();
             const id = a.payload.doc.id;
-            const admin = data.admin;
-            const gMembers: [] =
-              data.members.length > 0
-                ? data.members
-                : ["809809898098098777777"];
-            console.log("Poster --- > " + gMembers);
-            console.log("#### group List =" + JSON.stringify(data));
+            const groupId = data.groupId;
+            console.log("#### group ID =" + JSON.stringify(groupId));
+            console.log("#### group-member =" + JSON.stringify(data));
             return this.firestore
-              .collection("users", (ref) =>
-                ref.where(
-                  firebase.firestore.FieldPath.documentId(),
-                  "in",
-                  gMembers
-                )
-              )
+              .doc("groups/"+groupId)
               .valueChanges()
               .pipe(
-                map((members) => {
-                  console.log("Member List " + JSON.stringify(members));
-                  return Object.assign({ id, gMembers: members, ...data });
+                map((g) => {
+                  console.log("Member List 12344556666 " + JSON.stringify(g));
+                  return Object.assign({ id, group: g, ...data });
                 })
               );
           });
@@ -154,6 +170,35 @@ export class GroupService {
         flatMap((posts) => combineLatest(posts))
       );
   }
+
+  getGroupMembers(groupId,limit) {
+    console.log('start getGroups');
+    return this.firestore
+      .collection<any>('group-member', (ref) => ref.where('groupId','==' ,groupId).limit(limit).orderBy("created", "desc"))
+      .snapshotChanges()
+      .pipe(
+        map((actions) => {
+          return actions.map((a) => {
+            const data = a.payload.doc.data();
+            const id = a.payload.doc.id;
+            const userId = data.userId;
+            console.log("#### group ID =" + JSON.stringify(groupId));
+            console.log("#### group-members list =" + JSON.stringify(data));
+            return this.firestore
+              .doc("users/"+userId)
+              .valueChanges()
+              .pipe(
+                map((g) => {
+                  console.log("Member List 12344556666 " + JSON.stringify(g));
+                  return Object.assign({ id, user: g, ...data });
+                })
+              );
+          });
+        }),
+        flatMap((posts) => combineLatest(posts))
+      );
+  }
+
 
   getGroupMembersList(list,limit) {
     const listArr = list.length > 0 ? list : ['89008908080'];
@@ -173,12 +218,12 @@ export class GroupService {
     //console.log("post detail " + JSON.stringify(comment));
     return this.firestore.collection("comment-thread").add(thread);
   }
-  getGroupMembers(members) {
-    console.log("start getMembers with id" + JSON.stringify(members));
-    return this.firestore
-      .collection<any>("users", (ref) => ref.where("uid", "in", members))
-      .get();
-  }
+  // getGroupMembers(members) {
+  //   console.log("start getMembers with id" + JSON.stringify(members));
+  //   return this.firestore
+  //     .collection<any>("users", (ref) => ref.where("uid", "in", members))
+  //     .get();
+  // }
   getOneGroup(id) {
     return this.firestore.doc(`groups/${id}`).valueChanges();
   }
