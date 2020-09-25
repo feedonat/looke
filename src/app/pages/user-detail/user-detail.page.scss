@@ -87,9 +87,15 @@ ion-card {
   width: 104px;
   height: 100px;
 }
+// ion-toolbar {
+//   --background: transparent !important;
+//   --ion-color-base: transparent !important;
+//   --border-width: 0;
+// }
 ion-toolbar {
-  --background: transparent;
-  --ion-color-base: transparent !important;
+  --background: transparent no-repeat fixed center;
+  position: absolute;
+  top: 0;
 }
 
 /* Remove bottom border on md */

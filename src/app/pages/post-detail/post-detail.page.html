@@ -7,12 +7,12 @@
     <!-- A favorite button will not show if user not login. -->
     <ion-buttons slot="end">
       <ion-button color="light" (click)="toggleHeart()">
-        <ion-icon slot="icon-only" [name]="heartType"></ion-icon>
+        <ion-icon slot="icon-only" [name]="heartType" color="medium"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-button color="light" (click)="toggleActionSeet()">
-        <ion-icon slot="icon-only" name="more"></ion-icon>
+        <ion-icon  slot="icon-only" name="ellipsis-vertical-outline" color="light"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -33,8 +33,8 @@
   <ion-row color="light">
     <ion-col class="card-footer1">
       <ion-button fill="clear" size="small" color="primary">
-        <ion-icon slot="start" name="ios-chatboxes" color="primary"></ion-icon>
-        {{(post?.count)}}
+        <ion-icon slot="start" name="chatbubbles-outline" color="primary"></ion-icon>
+        {{(comments| async)?.length}}
       </ion-button>
       <ion-button (click)="toggleHeart()" fill="clear" size="small" color="#FFD700">
         <ion-icon slot="start" [name]="heartType" color="primary"></ion-icon>
@@ -55,7 +55,6 @@
     </h5>
     <div>
       <ion-item class="comment-list" *ngFor="let c of comments | async ">
-
         <ion-row>
           <img (click)="userDetail(c.poster)" [src]="c.postUser?.img" />
           <ion-label class="ion-text-wrap" (click)="userDetail(c.poster)">

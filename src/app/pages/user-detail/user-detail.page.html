@@ -18,7 +18,7 @@
 
   </ion-toolbar>
 </ion-header>
-<ion-content no-padding fullscreen (ionScroll)="onScroll($event)" [scrollEvents]="true" [class.transition]="transition">
+<ion-content fullscreen (ionScroll)="onScroll($event)" [scrollEvents]="true" [class.transition]="transition">
   <!--*********** Image header  ***********-->
   <!-- <div class="detail-header" [ngStyle]="{'background-image': 'url(' + itemArray.image + ')'}">
 </div> -->
@@ -67,7 +67,7 @@
      </ion-avatar>
      <ion-buttons slot="end">
        <ion-button (click)="toggleActionSeet()">
-         <ion-icon slot="icon-only" color="medium" name="more"></ion-icon>
+        <ion-icon name="ellipsis-vertical-outline" color="light"></ion-icon>
         </ion-button>
      </ion-buttons>
      <ion-label class="post-header" [routerLink]="[post.id]">
@@ -92,11 +92,11 @@
    <ion-row>
      <ion-col>
        <ion-button fill="clear" size="small" color="#FFD700" [routerLink]="[post.id]">
-         <ion-icon  slot="start" name="ios-chatboxes" color="gray"></ion-icon>
+        <ion-icon slot="start"  name="chatbubbles-outline" color="gray"></ion-icon>
          {{post?.commentCount}}
        </ion-button>
        <ion-button fill="clear" size="small" color="#FFD700" (click)="lovePost(post.id)">
-         <ion-icon slot="start" name="ios-heart" color="gray"></ion-icon>
+         <ion-icon slot="start" name="heart" color="primary"></ion-icon>
          {{post?.likes?.length}}
        </ion-button>
      </ion-col>

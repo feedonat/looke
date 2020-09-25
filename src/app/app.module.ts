@@ -6,7 +6,6 @@ import { Facebook} from "@ionic-native/facebook/ngx";
 import {
   IonicModule,
   IonicRouteStrategy,
-  Events,
   AlertController,
   ToastController,
   LoadingController,
@@ -79,6 +78,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     Camera,
     NgxImageCompressService,
     File,
+    StatusBar,
     InAppBrowser,
     Crop,
     Geolocation,
@@ -94,7 +94,6 @@ export class AppModule {
     private platform: Platform,
     private router: Router,
     private preference: Preference,
-    private events: Events,
     private alertCtrl: AlertController,
     private toastCtrl: ToastController,
     private loadingCtrl: LoadingController,

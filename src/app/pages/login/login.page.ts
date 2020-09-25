@@ -132,9 +132,9 @@ export class LoginPage implements OnInit {
   }
   navigateByRole(role) {
     if (role == "USER") {
-      this.router.navigateByUrl("1/home/place");
+      this.router.navigateByUrl("1/post");
     } else if (role == "ADMIN") {
-      this.router.navigateByUrl("1/home/place");
+      this.router.navigateByUrl("1/post");
     }
   }
 

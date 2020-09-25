@@ -58,7 +58,7 @@ export class PostDetailPage implements OnInit {
       .subscribe((res: any) => {
         const currentUser = this.afAuth.auth.currentUser.uid;
         console.log('current user = '+ currentUser );
-        this.heartType = res.likes.includes(currentUser) ? 'heart' : 'heart-empty';
+        this.heartType = res.likes.includes(currentUser) ? 'heart' : 'heart-outline';
         this.liked = this.heartType === 'heart' ? true : false;
         //const comments = res["comments"].reverse();
         console.log('my post with comments reverted: ', res);
@@ -82,7 +82,7 @@ export class PostDetailPage implements OnInit {
 
   toggleHeart() {
     console.log("calling toggleHeart");
-    if (this.heartType === "heart-empty") {
+    if (this.heartType === "heart-outline") {
      this.postService.like(this.id);
     }else{
       this.postService.disLike(this.id);

@@ -1,16 +1,15 @@
-
- <ion-header no-border>
-  <ion-toolbar>
+<ion-header class="ion-no-border">
+  <ion-toolbar class="ion-no-border" color="primary">
     <ion-buttons slot="start">
       <ion-button>
-        <ion-back-button color="light"  defaultHref="1/home/post"></ion-back-button>
+        <ion-back-button color="light" defaultHref="1/home/post"></ion-back-button>
       </ion-button>
     </ion-buttons>
     <ion-title>&nbsp;</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="openSignInModal()" *ngIf="!user">
         <ion-icon name="log-in"></ion-icon>
-       </ion-button>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -18,126 +17,130 @@
 <ion-content fullscreen fixed>
 
   <div class="card">
-      <div class="header">
-        <div class="avatar">
-          <img [src]="user?.img ? user.img : './assets/img/avatar.png'" alt="">
-        </div>
+    <div class="header">
+      <div class="avatar">
+        <img [src]="user?.img ? user.img : './assets/img/avatar.png'" alt="">
       </div>
-      <div class="card-body">
-        <div class="user-meta ion-text-center">
-          <h3 class="playername">{{ user?.name }}</h3>
-          <h5 class="country">Dallas,TX</h5>
-        </div>
-          <ion-card class="main-card">
-            <ion-card-content class="card-main-content">
-              <ion-item class="card-image-blk">
-              <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Vector_cup_of_coffee.svg/1094px-Vector_cup_of_coffee.svg.png" slot="end" />
-                </ion-item>
-            <ion-card-header>
-              <ion-card-title>Madison, WI</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the Wisconsin Territory in 1836.
-            </ion-card-content>
-              </ion-card-content>
-            <ion-card-content>
-        <ion-item class="card-amount">
-        <ion-label>Card Button Item 2</ion-label>
-          <ion-icon name="walk" slot="end"></ion-icon>
-      </ion-item>
-      </ion-card-content>
-          </ion-card>
-<ion-card mode="ios">
-          <ion-list>
-            <ion-item (click)="myBusiness()">
-              <ion-icon name="pin" slot="start" color="primary"></ion-icon>
-              <ion-label>
-                <p class="bold" color="dark">My Places</p>
-              </ion-label>
-              <ion-icon name="arrow-forward" slot="end"></ion-icon>
-            </ion-item>
-            <ion-item (click)="myLikes()">
-              <ion-icon name="heart" slot="start" color="primary"></ion-icon>
-              <ion-label>
-                <p color="dark">likes</p>
-              </ion-label>
-              <ion-icon name="arrow-forward" slot="end"></ion-icon>
-            </ion-item>
-            <ion-item (click)="myReview()">
-              <ion-icon name="star" slot="start" color="primary"></ion-icon>
-              <ion-label>
-                <p class="bold link text-slarge">Reviews</p>
-              </ion-label>
-              <ion-icon name="arrow-forward" slot="end"></ion-icon>
-            </ion-item>
-            <ion-item (click)="changePassword()">
-              <ion-icon name="lock" slot="start" color="primary"></ion-icon>
-              <ion-label>
-                <p class="link bold link text-slarge">Change Password</p>
-              </ion-label>
-              <ion-icon name="arrow-forward" slot="end"></ion-icon>
-            </ion-item>
-
-            <ion-item (click)="addPost()">
-              <ion-icon name="lock" slot="start" color="primary"></ion-icon>
-              <ion-label>
-                <p class="link bold link text-slarge">AddPost</p>
-              </ion-label>
-              <ion-icon name="arrow-forward" slot="end"></ion-icon>
-            </ion-item>
-
-            <ion-item (click)="banner()">
-              <ion-icon name="lock" slot="start" color="primary"></ion-icon>
-              <ion-label>
-                <p class="link bold link text-slarge">banner</p>
-              </ion-label>
-              <ion-icon name="arrow-forward" slot="end"></ion-icon>
-            </ion-item>
-
-            <ion-item (click)="postCategory()">
-              <ion-icon name="lock" slot="start" color="primary"></ion-icon>
-              <ion-label>
-                <p class="link bold link text-slarge">PostCategory</p>
-              </ion-label>
-              <ion-icon name="arrow-forward" slot="end"></ion-icon>
-            </ion-item>
-
-            <ion-item (click)="addGroup()">
-              <ion-icon name="lock" slot="start" color="primary"></ion-icon>
-              <ion-label>
-                <p class="link bold link text-slarge">Add Group</p>
-              </ion-label>
-              <ion-icon name="arrow-forward" slot="end"></ion-icon>
-            </ion-item>
-
-            <ion-item [(ngModel)]="user" (click)="onPresentEditModal(user)"[ngModelOptions]="{standalone: true}" ngDefaultControl>
-              <ion-icon name="create" slot="start" color="primary"></ion-icon>
-              <ion-label>
-                <p class="link bold link text-slarge" >Edit Profile</p>
-              </ion-label>
-              <ion-icon name="arrow-forward" slot="end"></ion-icon>
-            </ion-item>
-            <ion-item (click)="mySettings()">
-              <ion-icon name="cog" slot="start" color="primary"></ion-icon>
-              <ion-label>
-                <p class="link bold link text-slarge" color="dark">Settings</p>
-              </ion-label>
-              <ion-icon name="arrow-forward" slot="end"></ion-icon>
-            </ion-item>
-            <ion-item lines="none" (click)="onLogout()">
-              <ion-icon name="log-out" slot="start" color="primary"></ion-icon>
-              <ion-label>
-                <p class="link bold link text-slarge">Logout</p>
-              </ion-label>
-              <ion-icon name="arrow-forward" slot="end"></ion-icon>
-            </ion-item>
-          </ion-list>
-        </ion-card>
-        </div>
+    </div>
+    <div class="card-body">
+      <div class="user-meta ion-text-center">
+        <h3 class="playername">{{ user?.name }}</h3>
+        <h5 class="country">Dallas,TX</h5>
       </div>
+      <!-- <ion-card class="main-card">
+        <ion-card-content class="card-main-content">
+          <ion-item class="card-image-blk">
+            <img class="card-img"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Vector_cup_of_coffee.svg/1094px-Vector_cup_of_coffee.svg.png"
+              slot="end" />
+          </ion-item>
+          <ion-card-header>
+            <ion-card-title>Madison, WI</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the
+            Wisconsin Territory in 1836.
+          </ion-card-content>
+        </ion-card-content>
+        <ion-card-content>
+          <ion-item class="card-amount">
+            <ion-label>Card Button Item 2</ion-label>
+            <ion-icon name="walk" slot="end"></ion-icon>
+          </ion-item>
+        </ion-card-content>
+      </ion-card> -->
+      <ion-card mode="ios">
+        <ion-list>
+          <ion-item (click)="myBusiness()">
+            <ion-icon name="pin" slot="start" color="primary"></ion-icon>
+            <ion-label>
+              <p class="bold" color="dark">My Places</p>
+            </ion-label>
+            <ion-icon name="arrow-forward" slot="end"></ion-icon>
+          </ion-item>
+          <ion-item (click)="myLikes()">
+            <ion-icon name="heart" slot="start" color="primary"></ion-icon>
+            <ion-label>
+              <p color="dark">likes</p>
+            </ion-label>
+            <ion-icon name="arrow-forward" slot="end"></ion-icon>
+          </ion-item>
+          <ion-item (click)="myReview()">
+            <ion-icon name="star" slot="start" color="primary"></ion-icon>
+            <ion-label>
+              <p class="bold link text-slarge">Reviews</p>
+            </ion-label>
+            <ion-icon name="arrow-forward" slot="end"></ion-icon>
+          </ion-item>
+          <ion-item (click)="changePassword()">
+            <ion-icon name="lock" slot="start" color="primary"></ion-icon>
+            <ion-label>
+              <p class="link bold link text-slarge">Change Password</p>
+            </ion-label>
+            <ion-icon name="arrow-forward" slot="end"></ion-icon>
+          </ion-item>
 
-      
-     <!-- // </ion-col>
+          <ion-item (click)="addPost()">
+            <ion-icon name="lock" slot="start" color="primary"></ion-icon>
+            <ion-label>
+              <p class="link bold link text-slarge">AddPost</p>
+            </ion-label>
+            <ion-icon name="star" slot="end"></ion-icon>
+          </ion-item>
+
+          <ion-item (click)="banner()">
+            <ion-icon name="lock" slot="start" color="primary"></ion-icon>
+            <ion-label>
+              <p class="link bold link text-slarge">banner</p>
+            </ion-label>
+            <ion-icon name="star" slot="end"></ion-icon>
+          </ion-item>
+
+          <ion-item (click)="postCategory()">
+            <ion-icon name="lock" slot="start" color="primary"></ion-icon>
+            <ion-label>
+              <p class="link bold link text-slarge">PostCategory</p>
+            </ion-label>
+            <ion-icon name="star" slot="end"></ion-icon>
+          </ion-item>
+
+          <ion-item (click)="addGroup()">
+            <ion-icon name="lock" slot="start" color="primary"></ion-icon>
+            <ion-label>
+              <p class="link bold link text-slarge">Add Group</p>
+            </ion-label>
+            <ion-icon name="star" slot="end"></ion-icon>
+          </ion-item>
+
+          <ion-item [(ngModel)]="user" (click)="onPresentEditModal(user)" [ngModelOptions]="{standalone: true}"
+            ngDefaultControl>
+            <ion-icon name="create" slot="start" color="primary"></ion-icon>
+            <ion-label>
+              <p class="link bold link text-slarge">Edit Profile</p>
+            </ion-label>
+            <ion-icon name="arrow-forward" slot="end"></ion-icon>
+          </ion-item>
+          <ion-item (click)="mySettings()">
+            <ion-icon name="cog" slot="start" color="primary"></ion-icon>
+            <ion-label>
+              <p class="link bold link text-slarge" color="dark">Settings</p>
+            </ion-label>
+            <ion-icon name="arrow-forward" slot="end"></ion-icon>
+          </ion-item>
+          <ion-item lines="none" (click)="onLogout()">
+            <ion-icon name="log-out" slot="start" color="primary"></ion-icon>
+            <ion-label>
+              <p class="link bold link text-slarge">Logout</p>
+            </ion-label>
+            <ion-icon name="arrow-forward" slot="end"></ion-icon>
+          </ion-item>
+        </ion-list>
+      </ion-card>
+    </div>
+  </div>
+
+
+  <!-- // </ion-col>
     //</ion-row>
  // </ion-grid>  -->
 </ion-content>

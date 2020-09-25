@@ -169,7 +169,14 @@ export class HomePage implements OnInit {
   //     this.router.navigateByUrl('/'+url+'/'+itemId);
   //   }
   // }
+  doRefresh(event) {
+    console.log('Begin async operation');
 
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
+  }
 
   ThemeSwitcher() {
     // 0 = day mode

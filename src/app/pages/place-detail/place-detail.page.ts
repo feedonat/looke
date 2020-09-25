@@ -16,7 +16,15 @@ export class PlaceDetailPage implements OnInit {
   id = null;
   place: any;
   parentPath:any;
+  public apiKey: string = environment.googleMapsApiKey;
   images = 5;
+  slideOptsOne = {
+    zoom: false,
+    slidesPerView: 1.8,
+    spaceBetween: -35,
+    centeredSlides: false,
+    freeMode: true,
+  };
   picsum: string[] = Array.from(
     new Array(12),
     (x, i) => `https://picsum.photos/1080/720/?${i}`
@@ -88,7 +96,7 @@ export class PlaceDetailPage implements OnInit {
   //**** favorite  ****/
   favorite: boolean = false;
   favArray: any;
-	heartType: string = "heart-empty";
+	heartType: string = "heart-outline";
   
   constructor( private platform : Platform ,
     private route: ActivatedRoute, 

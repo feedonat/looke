@@ -3,7 +3,7 @@
     <ion-title >
       <img class="title-image" src="../../../assets/imgs/logoLookE.png" width="150" height="30" />
     </ion-title>
-    <ion-buttons slot="end" (click)="presentFilter()">
+    <ion-buttons slot="end" (click)="ThemeSwitcher()">
       <ion-button>
         <ion-icon name="notifications" color="light"></ion-icon>
        </ion-button>
@@ -12,6 +12,12 @@
 </ion-header> 
 
 <ion-content>
+
+  <ion-refresher slot="fixed" id="refresher" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+
 <div>
  <section class="heading"> 
   <div class="top-horizontal-scroll  slide-left">
@@ -68,10 +74,7 @@
     </ion-slide>
   </ion-slides> -->
   <div class="home-content">
-       <!--*********** Category  ***********-->
-       <ion-item lines="none">
-        <p class="main-b-header6">Category</p>
-      </ion-item>
+       <h3>your groups</h3>
       <div class="top-horizontal-scroll  slide-left">
         <ion-card tappable class="shop-main-h-card shop-card-s-wide " *ngFor="let category of groups"
           (click)="openDetail(category.groupId)">
@@ -95,7 +98,7 @@
         </ion-avatar>
         <ion-buttons slot="end">
           <ion-button (click)="toggleActionSeet()">
-            <ion-icon slot="icon-only" color="medium" name="more"></ion-icon>
+            <ion-icon  slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>
            </ion-button>
         </ion-buttons>
         <ion-label class="post-header" (click)="userDetail(post?.creator)">
@@ -120,11 +123,11 @@
       <ion-row>
         <ion-col>
           <ion-button fill="clear" size="small" color="#FFD700" [routerLink]="[post.id]">
-            <ion-icon  slot="start" name="ios-chatboxes" color="gray"></ion-icon>
+            <ion-icon  slot="start" name="chatbox-ellipses-outline" color="primary"></ion-icon>
             {{post?.commentCount}}
           </ion-button>
           <ion-button fill="clear" size="small" color="#FFD700" (click)="lovePost(post.id)">
-            <ion-icon slot="start" name="ios-heart" color="gray"></ion-icon>
+            <ion-icon slot="start" name="heart-outline" color="primary"></ion-icon>
             {{post?.likes?.length}}
           </ion-button>
         </ion-col>
