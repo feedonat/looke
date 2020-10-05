@@ -13,7 +13,7 @@
       </ion-item>
       <ion-slides [options]="slideOptsOne">
         <ion-slide class="group-ion-slide" *ngFor="let g of groups">
-           <ion-card class="group-ion-card" tappable 
+           <ion-card mode="ios" class="group-ion-card" tappable 
            (click)="groupDetail(g.groupId)">
             <img (click)="groupDetail(g.groupId)" [src]="g.group?.coverImg ? g.group.coverImg : './assets/img/image-outline.svg'" alt="" />
             <ion-card-header>
@@ -28,7 +28,7 @@
       </ion-item>
     <ion-card mode="ios"
     button
-    class="shadow ion-no-margin ion-margin-bottom" *ngFor="let u of allGroups | async " tappable >
+    class="ion-margin-bottom" *ngFor="let u of allGroups | async " tappable >
       <ion-card-content  (click)="groupDetail(u.id)">
         <ion-row>
           <ion-col size="4">

@@ -47,6 +47,7 @@ export class PlacePage implements OnInit {
   private location: { lat?: number; lng?: number } = {};
   protected map: google.maps.Map;
   protected geocoder: google.maps.Geocoder;
+
   protected marker: google.maps.Marker;
   protected autocompleteService: google.maps.places.AutocompleteService;
   protected placesService: google.maps.places.PlacesService;
@@ -265,11 +266,13 @@ export class PlacePage implements OnInit {
         this.zone.run(() => {
           const location = details.geometry.location;
           this.searchBar.value = details.formatted_address;
+          this.placeForm.get('address').patchValue = details.formatted_address;
           this.setMarkerPosition(location);
           this.map.panTo(location);
           this.map.setZoom(15);
           this.location.lat = location.lat();
           this.location.lng = location.lng();
+          console.log("Picked address = : "+JSON.stringify(details.formatted_address));
         });
       }
     );

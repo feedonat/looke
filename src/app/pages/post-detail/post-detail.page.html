@@ -18,7 +18,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen>
+<ion-content>
   <ion-card mode="ios">
     <img *ngIf="post?.img" [src]="post?.img" />
     <ion-card-subtitle>
@@ -29,31 +29,33 @@
     <ion-card-content>
       <p [innerHTML]="post?.description"></p>
     </ion-card-content>
+  <hr>
+    <ion-row>
+      <ion-col class="card-footer1">
+        <ion-button fill="clear" size="small" color="primary">
+          <ion-icon slot="start" name="chatbubbles-outline" color="primary"></ion-icon>
+          {{(comments| async)?.length}}
+        </ion-button>
+        <ion-button (click)="toggleHeart()" fill="clear" size="small" color="#FFD700">
+          <ion-icon slot="start" [name]="heartType" color="primary"></ion-icon>
+          {{post?.likes?.length}}
+        </ion-button>
+      </ion-col>
+      <ion-col center class="ion-text-right card-footer2">
+        <ion-button fill="clear" size="small" color="dark">
+          REPLY
+        </ion-button>
+      </ion-col>
+      <br>
+    </ion-row>
   </ion-card>
-  <ion-row color="light">
-    <ion-col class="card-footer1">
-      <ion-button fill="clear" size="small" color="primary">
-        <ion-icon slot="start" name="chatbubbles-outline" color="primary"></ion-icon>
-        {{(comments| async)?.length}}
-      </ion-button>
-      <ion-button (click)="toggleHeart()" fill="clear" size="small" color="#FFD700">
-        <ion-icon slot="start" [name]="heartType" color="primary"></ion-icon>
-        {{post?.likes?.length}}
-      </ion-button>
-    </ion-col>
-    <ion-col center class="ion-text-right card-footer2">
-      <ion-button fill="clear" size="small" color="dark">
-        REPLY
-      </ion-button>
-    </ion-col>
-    <br>
-  </ion-row>
+
   <ion-list *ngIf="(comments| async)?.length>0 ;else noComment" class="ion-no-margin">
-    <h5 class=" ion-no-margin comment-header">
+    <h3 class=" ion-no-margin comment-header">
       <ion-icon class="text-medium" name="chatbubbles"></ion-icon>
       Comments
-    </h5>
-    <div>
+    </h3>
+    <hr>
       <ion-item class="comment-list" *ngFor="let c of comments | async ">
         <ion-row>
           <img (click)="userDetail(c.poster)" [src]="c.postUser?.img" />
@@ -79,7 +81,7 @@
           </ion-col>
         </ion-row>
       </ion-item>
-    </div>
+  
   </ion-list>
   <ng-template #noComment>
     <p class="no-comment">No Comment yet - be the first to give a comment !</p>
@@ -97,7 +99,6 @@
           </ion-button>
         </ion-buttons>
       </ion-item>
-
     </form>
   </ion-toolbar>
 </ion-footer>

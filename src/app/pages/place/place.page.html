@@ -72,7 +72,7 @@
 
       <ion-item lines="none">
         <ion-label position="stacked">Address</ion-label>
-        <ion-input type="address" formControlName="address"></ion-input>
+        <ion-input type="address" formControlName="address" [value]="searchBar?.value"></ion-input>
       </ion-item>
       
       <ion-button type="submit" class="ion-padding-horizontal ion-margin-vertical"

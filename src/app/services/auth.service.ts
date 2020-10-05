@@ -60,6 +60,22 @@ export class AuthService {
     });
   }
 
+
+  signUpOnboarding(fname,gender,address,uemail,pass) {
+    return this.afAuth.auth.createUserWithEmailAndPassword(uemail, pass).then(data => {
+      console.log('after register: ', data);
+      return this.db.doc(`users/${data.user.uid}`).set({
+        name: fname,
+        email: uemail,
+        role: 'USER',
+        address : address,
+        gender: gender,
+        groups: [],
+        created: firebase.firestore.FieldValue.serverTimestamp()
+      });
+    });
+  }
+
 updateProfiel(record) {
   let storageRef: AngularFireStorageReference = null;
   const imageData = record.img;

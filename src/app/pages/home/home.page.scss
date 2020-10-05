@@ -154,6 +154,8 @@ ion-avatar {
     font-weight: bold;
     font-style: normal;
     text-overflow: ellipsis;
+    margin-bottom: 0px;
+    margin-left: 5px;
   }
 }
 
@@ -220,7 +222,7 @@ ion-card {
   margin-bottom: -15px;
 }
 ion-card-content:focus {
-  outline: none;
+  outline: invert;
 }
 
 /* Remove bottom border on md */
